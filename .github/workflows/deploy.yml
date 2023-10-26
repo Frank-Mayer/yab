@@ -3,6 +3,12 @@ name: Deploy to Pages
 on:
   push:
     branches: ["main"]
+    paths:
+      - "*.go"
+      - "**/*.go"
+      - "go.mod"
+      - "go.sum"
+      - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
 permissions:
@@ -53,10 +59,30 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           path: "./selene-darwin-amd64"
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Go environment
+        uses: actions/setup-go@v4.1.0
+        with:
+          go-version: ">=1.21.1"
+          cache: false
+          architecture: x64
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Tidy
+        run: go mod tidy
+      - name: Build
+        run: go build -o selene-debian-amd64 main.go
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path: "./selene-debian-amd64"
   deploy:
     needs:
       - win
       - mac
+      - ubuntu
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
