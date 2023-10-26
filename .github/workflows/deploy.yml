@@ -1,0 +1,84 @@
+name: Deploy to Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  win:
+    runs-on: windows-latest
+    steps:
+      - name: Setup Go environment
+        uses: actions/setup-go@v4.1.0
+        with:
+          go-version: ">=1.21.1"
+          cache: false
+          architecture: x64
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Tidy
+        run: go mod tidy
+      - name: Build
+        run: go build -o selene-windows-amd64.exe main.go
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path: "./selene-windows-amd64.exe"
+  mac:
+    runs-on: macos-latest
+    steps:
+      - name: Setup Go environment
+        uses: actions/setup-go@v4.1.0
+        with:
+          go-version: ">=1.21.1"
+          cache: false
+          architecture: x64
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Tidy
+        run: go mod tidy
+      - name: Build
+        run: go build -o selene-darwin-amd64 main.go
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path: "./selene-darwin-amd64"
+  deploy:
+    needs:
+      - win
+      - mac
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+      - name: LS
+        run: ls -l
+      - name: Generate index.html
+        run: |
+          cd artifact
+          echo '<h1>Artifacts</h1><ul>' > index.html
+          for n in selene-*; do printf '<li><a href="%s">%s</a></li>\n' "$n" "$n"; done >> index.html
+          echo '</ul>' >> index.html
+          cd ..
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: "./artifact"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
