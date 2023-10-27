@@ -86,13 +86,14 @@ func run_lua_file(config_path string, init_file string) error {
 }
 
 func get_config_path() (string, error) {
-	init := "./selene"
+	init := "./.selene"
 
 	// check for current directory
 	if _, err := os.Stat(init); !os.IsNotExist(err) {
 		return init, nil
 	}
 
+	init = "./selene"
 	// check for XDG_CONFIG_HOME
 	if config_home := path.Join(os.Getenv("XDG_CONFIG_HOME"), init); config_home != "" {
 		if _, err := os.Stat(config_home); !os.IsNotExist(err) {

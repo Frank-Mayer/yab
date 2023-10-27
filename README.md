@@ -13,7 +13,8 @@ selene build
 ```
 
 Checks of one of the following files exist and runs it:
-1. `./selene/build.lua`
+
+1. `./.selene/build.lua`
 1. `$XDG_CONFIG_HOME/selene/build.lua`
 1. `$APPDATA/selene/build.lua`
 
