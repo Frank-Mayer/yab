@@ -36,3 +36,11 @@ If there is no init file, it will be created.
 - [Windows amd64](https://frank-mayer.github.io/selene/selene-windows-amd64.exe)
 - [Darwin amd64](https://frank-mayer.github.io/selene/selene-darwin-amd64)
 - [Debian amd64](https://frank-mayer.github.io/selene/selene-debian-amd64)
+
+## Lua API
+
+### selene_os_type
+
+Parameter: None.
+
+Returns: "windows" or "unix" on the respective system.
