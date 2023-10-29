@@ -6,6 +6,8 @@
 
 Selene is a versatile and user-friendly build tool configured in Lua, designed to streamline your development workflow. Whether you're compiling, packaging, or automating tasks, Selene empowers you to define and manage your build process with ease. Say goodbye to complex configuration files and hello to the simplicity and flexibility of Lua. Get started today and unlock the full potential of your projects!
 
+Looking for an example? Take a look at [this projects `.selene` folder](https://github.com/Frank-Mayer/selene/tree/main/.selene).
+
 ## Usage
 
 ```bash
