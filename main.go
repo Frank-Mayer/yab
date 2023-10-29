@@ -7,7 +7,10 @@ import (
 	"path"
 
 	"github.com/Shopify/go-lua"
+	"selene.frankmayer.io/extensions"
 )
+
+const version = "0.1.0"
 
 func main() {
 	// find config folder
@@ -18,6 +21,11 @@ func main() {
 	}
 
 	argsWithoutProg := os.Args[1:]
+
+	if len(argsWithoutProg) == 1 && argsWithoutProg[0] == "version" {
+		fmt.Println(version)
+		os.Exit(0)
+	}
 
 	// if no args, run init.lua
 	if len(argsWithoutProg) == 0 {
@@ -69,6 +77,7 @@ func run_lua_file(config_path string, init_file string) error {
 	// setup lua
 	l := lua.NewState()
 	lua.OpenLibraries(l)
+	extensions.RegisterExtensions(l)
 
 	// set package.path to config folder
 	err := lua.DoString(l, fmt.Sprintf("package.path = '%s/?.lua;'", config_path))
