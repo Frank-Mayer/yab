@@ -22,7 +22,8 @@ func main() {
 
 	argsWithoutProg := os.Args[1:]
 
-	if len(argsWithoutProg) == 1 && argsWithoutProg[0] == "version" {
+	if len(argsWithoutProg) == 1 &&
+		(argsWithoutProg[0] == "--version" || argsWithoutProg[0] == "-v") {
 		fmt.Println(version)
 		os.Exit(0)
 	}
