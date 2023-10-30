@@ -7,6 +7,7 @@ import (
 	"path"
 
 	"github.com/Shopify/go-lua"
+	"selene.frankmayer.io/docs"
 	"selene.frankmayer.io/extensions"
 )
 
@@ -23,15 +24,21 @@ func main() {
 	// process arguments
 	argsWithoutProg := os.Args[1:]
 
-	if len(argsWithoutProg) == 1 &&
-		(argsWithoutProg[0] == "--version" || argsWithoutProg[0] == "-v") {
-		fmt.Println(version)
-		os.Exit(0)
+	if len(argsWithoutProg) == 1 {
+		switch argsWithoutProg[0] {
+		case "--help", "-h":
+			docs.Help()
+			os.Exit(0)
+		case "--version", "-v":
+			fmt.Println(version)
+			os.Exit(0)
+		}
 	}
 
 	// if no args, exit
 	if len(argsWithoutProg) == 0 {
 		fmt.Println("No arguments given")
+		docs.Help()
 		os.Exit(1)
 	}
 
