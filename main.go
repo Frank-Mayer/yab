@@ -20,6 +20,7 @@ func main() {
 		os.Exit(1)
 	}
 
+	// process arguments
 	argsWithoutProg := os.Args[1:]
 
 	if len(argsWithoutProg) == 1 &&
@@ -28,48 +29,47 @@ func main() {
 		os.Exit(0)
 	}
 
-	// if no args, run init.lua
+	// if no args, exit
 	if len(argsWithoutProg) == 0 {
-		file := "init"
-		init_file, err := get_init_file(config_path, file, true)
+		fmt.Println("No arguments given")
+		os.Exit(1)
+	}
+
+	// check for -- to pass args to lua
+	pass_args := false
+	pass_args_list := []string{}
+	arg_separator_index := len(argsWithoutProg)
+	for i := 0; i < len(argsWithoutProg); i++ {
+		arg := argsWithoutProg[i]
+		if pass_args {
+			pass_args_list = append(pass_args_list, arg)
+		} else if arg == "--" {
+			pass_args = true
+			arg_separator_index = i
+		}
+	}
+	extensions.SetArgs(pass_args_list)
+	// run each file passed as an argument
+	for i := 0; i < arg_separator_index; i++ {
+		file := argsWithoutProg[i]
+		init_file, err := get_init_file(config_path, file)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
 		err = run_lua_file(config_path, init_file)
 		if err != nil {
+			fmt.Println("Error running file: ", file)
 			fmt.Println(err)
 			os.Exit(1)
-		}
-	} else {
-		// run each file passed as an argument
-		for _, file := range argsWithoutProg {
-			init_file, err := get_init_file(config_path, file, false)
-			if err != nil {
-				fmt.Println("Could not find file: ", file)
-				fmt.Println(err)
-				os.Exit(1)
-			}
-			err = run_lua_file(config_path, init_file)
-			if err != nil {
-				fmt.Println("Error running file: ", file)
-				fmt.Println(err)
-				os.Exit(1)
-			}
 		}
 	}
 }
 
-func get_init_file(config_path string, file string, ensure_exist bool) (string, error) {
+func get_init_file(config_path string, file string) (string, error) {
 	init_file := path.Join(config_path, file+".lua")
-	if _, err := os.Stat(init_file); os.IsNotExist(err) {
-		if ensure_exist {
-			if _, err := os.Create(init_file); err != nil {
-				return "", err
-			}
-		} else {
-			return "", err
-		}
+	if _, err := os.Stat(init_file); err != nil {
+		return "", err
 	}
 	return init_file, nil
 }
