@@ -20,7 +20,7 @@ Prints this help.
 
 Initializes a new Selene project.
 
-## Lua API Functions (in the `selene` global table)
+## Lua API Functions (in the `Selene` global table)
 
 ### 𝑓 os_type
 

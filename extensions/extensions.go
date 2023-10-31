@@ -62,5 +62,5 @@ func RegisterExtensions(l *lua.State) {
 		l.SetField(-2, f.Name)
 	}
 
-	l.SetGlobal("selene")
+	l.SetGlobal("Selene")
 }
