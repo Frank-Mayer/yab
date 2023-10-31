@@ -9,33 +9,6 @@ import (
 	"selene.frankmayer.io/util"
 )
 
-type Function struct {
-	Name        string
-	Description string
-	Parameters  []string
-	Returns     []string
-}
-
-var functions = []Function{
-	{"os_type",
-		"Returns the operating system type.",
-		[]string{},
-		[]string{"\"windows\" or \"unix\" on the respective system."},
-	},
-	{
-		"args",
-		"Returns the command line arguments passed to the program.",
-		[]string{},
-		[]string{"A table containing the command line arguments."},
-	},
-	{
-		"check_exec",
-		"Checks if an executable is available in the system's PATH.",
-		[]string{"executable"},
-		[]string{"true if the executable is available, false otherwise."},
-	},
-}
-
 func Help() {
 	width := util.TermWidth()
 
@@ -69,17 +42,17 @@ func Markdown() string {
 	sb.WriteString("**" + bin_name + " --init**\n\n")
 	sb.WriteString("Initializes a new Selene project.\n\n")
 
-	sb.WriteString("## Lua API Functions\n\n")
-	for _, f := range functions {
+	sb.WriteString("## Lua API Functions (in the `selene` global table)\n\n")
+	for _, f := range extensions.Functions {
 		sb.WriteString(addFunction(&f))
 		sb.WriteString("\n")
 	}
 	return sb.String()
 }
 
-func addFunction(f *Function) string {
+func addFunction(f *extensions.Function) string {
 	var sb strings.Builder
-	sb.WriteString("### 𝑓 " + extensions.Name(f.Name) + "\n\n")
+	sb.WriteString("### 𝑓 " + f.Name + "\n\n")
 	sb.WriteString("*" + f.Description + "*\n\n")
 	sb.WriteString("**Parameters:** ")
 	if len(f.Parameters) > 0 {

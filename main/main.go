@@ -26,17 +26,7 @@ func main() {
 	argsWithoutProg := os.Args[1:]
 
 	if len(argsWithoutProg) == 1 {
-		switch argsWithoutProg[0] {
-		case "--help", "-h":
-			docs.Help()
-			os.Exit(0)
-		case "--version", "-v":
-			fmt.Println(version)
-			os.Exit(0)
-		case "--init":
-			init_project()
-			os.Exit(0)
-		}
+		treatSpecialArgs(argsWithoutProg[0])
 	}
 
 	// if no args, exit
@@ -60,15 +50,16 @@ func main() {
 		}
 	}
 	extensions.SetArgs(pass_args_list)
+
 	// run each file passed as an argument
 	for i := 0; i < arg_separator_index; i++ {
 		file := argsWithoutProg[i]
-		init_file, err := get_init_file(config_path, file)
+		init_file, err := getInitFile(config_path, file)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
-		err = run_lua_file(config_path, init_file)
+		err = runLuaFile(config_path, init_file)
 		if err != nil {
 			fmt.Println("Error running file: ", file)
 			fmt.Println(err)
@@ -77,7 +68,21 @@ func main() {
 	}
 }
 
-func get_init_file(config_path string, file string) (string, error) {
+func treatSpecialArgs(arg0 string) {
+	switch arg0 {
+	case "--help", "-h":
+		docs.Help()
+		os.Exit(0)
+	case "--version", "-v":
+		fmt.Println(version)
+		os.Exit(0)
+	case "--init":
+		initProject()
+		os.Exit(0)
+	}
+}
+
+func getInitFile(config_path string, file string) (string, error) {
 	init_file := path.Join(config_path, file+".lua")
 	if _, err := os.Stat(init_file); err != nil {
 		return "", err
@@ -85,7 +90,7 @@ func get_init_file(config_path string, file string) (string, error) {
 	return init_file, nil
 }
 
-func run_lua_file(config_path string, init_file string) error {
+func runLuaFile(config_path string, init_file string) error {
 	// setup lua
 	l := lua.NewState()
 	lua.OpenLibraries(l)
@@ -132,7 +137,7 @@ func get_config_path() (string, error) {
 	return "", errors.New("Could not find config file")
 }
 
-func init_project() {
+func initProject() {
 	f, err := os.Stat(".selene")
 	if os.IsNotExist(err) {
 		err = os.Mkdir(".selene", 0775)
@@ -141,7 +146,7 @@ func init_project() {
 			os.Exit(1)
 		}
 		fmt.Println("Created .selene")
-		err = init_demo_config()
+		err = initDemoConfig()
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
@@ -158,7 +163,7 @@ func init_project() {
 	os.Exit(0)
 }
 
-func init_demo_config() error {
+func initDemoConfig() error {
 	filename := ".selene/hello.lua"
 	f, err := os.Create(filename)
 	if err != nil {

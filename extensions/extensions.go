@@ -2,16 +2,65 @@ package extensions
 
 import "github.com/Shopify/go-lua"
 
-func register(name string, l *lua.State, f lua.Function) {
-	l.Register("selene_"+name, f)
+type Function struct {
+	Name        string
+	Description string
+	Parameters  []string
+	Returns     []string
+	Function    lua.Function
 }
 
-func Name(f string) string {
-	return "selene_" + f
+var Functions = []Function{
+	{"os_type",
+		"Returns the operating system type.",
+		[]string{},
+		[]string{"\"windows\" or \"unix\" on the respective system."},
+		os_type,
+	},
+	{
+		"args",
+		"Returns the command line arguments passed to the program.",
+		[]string{},
+		[]string{"A table containing the command line arguments."},
+		args,
+	},
+	{
+		"check_exec",
+		"Checks if an executable is available in the system's PATH.",
+		[]string{"executable"},
+		[]string{"true if the executable is available, false otherwise."},
+		checkExec,
+	},
+	{
+		"stdall",
+		"Call a shell command and return the full output (stdout + stderr) in one string.",
+		[]string{"command"},
+		[]string{"The output of the command."},
+		stdall,
+	},
+	{
+		"stdout",
+		"Call a shell command and return the output (stdout) in one string.",
+		[]string{"command"},
+		[]string{"The output of the command."},
+		stdout,
+	},
+	{
+		"stderr",
+		"Call a shell command and return the error output (stderr) in one string.",
+		[]string{"command"},
+		[]string{"The output of the command."},
+		stderr,
+	},
 }
 
 func RegisterExtensions(l *lua.State) {
-	register("os_type", l, os_type)
-	register("args", l, args)
-	register("check_exec", l, checkExec)
+	l.CreateTable(0, len(Functions))
+
+	for _, f := range Functions {
+		l.PushGoFunction(f.Function)
+		l.SetField(-2, f.Name)
+	}
+
+	l.SetGlobal("selene")
 }

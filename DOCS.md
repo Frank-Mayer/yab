@@ -20,9 +20,9 @@ Prints this help.
 
 Initializes a new Selene project.
 
-## Lua API Functions
+## Lua API Functions (in the `selene` global table)
 
-### 𝑓 selene_os_type
+### 𝑓 os_type
 
 *Returns the operating system type.*
 
@@ -30,7 +30,7 @@ Initializes a new Selene project.
 
 **Returns:** "windows" or "unix" on the respective system.
 
-### 𝑓 selene_args
+### 𝑓 args
 
 *Returns the command line arguments passed to the program.*
 
@@ -38,7 +38,7 @@ Initializes a new Selene project.
 
 **Returns:** A table containing the command line arguments.
 
-### 𝑓 selene_check_exec
+### 𝑓 check_exec
 
 *Checks if an executable is available in the system's PATH.*
 
@@ -46,4 +46,31 @@ Initializes a new Selene project.
 * executable
 
 **Returns:** true if the executable is available, false otherwise.
+
+### 𝑓 stdall
+
+*Call a shell command and return the full output (stdout + stderr) in one string.*
+
+**Parameters:** 
+* command
+
+**Returns:** The output of the command.
+
+### 𝑓 stdout
+
+*Call a shell command and return the output (stdout) in one string.*
+
+**Parameters:** 
+* command
+
+**Returns:** The output of the command.
+
+### 𝑓 stderr
+
+*Call a shell command and return the error output (stderr) in one string.*
+
+**Parameters:** 
+* command
+
+**Returns:** The output of the command.
 
