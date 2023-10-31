@@ -13,4 +13,5 @@ func Name(f string) string {
 func RegisterExtensions(l *lua.State) {
 	register("os_type", l, os_type)
 	register("args", l, args)
+	register("check_exec", l, checkExec)
 }

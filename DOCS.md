@@ -38,3 +38,12 @@ Initializes a new Selene project.
 
 **Returns:** A table containing the command line arguments.
 
+### 𝑓 selene_check_exec
+
+*Checks if an executable is available in the system's PATH.*
+
+**Parameters:** 
+* executable
+
+**Returns:** true if the executable is available, false otherwise.
+

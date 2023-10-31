@@ -28,6 +28,12 @@ var functions = []Function{
 		[]string{},
 		[]string{"A table containing the command line arguments."},
 	},
+	{
+		"check_exec",
+		"Checks if an executable is available in the system's PATH.",
+		[]string{"executable"},
+		[]string{"true if the executable is available, false otherwise."},
+	},
 }
 
 func Help() {
