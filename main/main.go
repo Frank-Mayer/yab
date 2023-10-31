@@ -9,6 +9,7 @@ import (
 	"github.com/Shopify/go-lua"
 	"selene.frankmayer.io/docs"
 	"selene.frankmayer.io/extensions"
+	"selene.frankmayer.io/util"
 )
 
 const version = "0.1.0"
@@ -31,6 +32,9 @@ func main() {
 			os.Exit(0)
 		case "--version", "-v":
 			fmt.Println(version)
+			os.Exit(0)
+		case "--init":
+			init_project()
 			os.Exit(0)
 		}
 	}
@@ -126,4 +130,43 @@ func get_config_path() (string, error) {
 	}
 
 	return "", errors.New("Could not find config file")
+}
+
+func init_project() {
+	f, err := os.Stat(".selene")
+	if os.IsNotExist(err) {
+		err = os.Mkdir(".selene", 0775)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		fmt.Println("Created .selene")
+		err = init_demo_config()
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		os.Exit(0)
+	} else if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	} else if !f.IsDir() {
+		fmt.Println(".selene is not a directory")
+		os.Exit(1)
+	}
+	fmt.Println(".selene already exists")
+	os.Exit(0)
+}
+
+func init_demo_config() error {
+	filename := ".selene/hello.lua"
+	f, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	f.WriteString("print('Hello, world!')")
+	fmt.Println("Created", filename)
+	fmt.Println("Run with `" + util.BinName() + " hello`")
+	return nil
 }

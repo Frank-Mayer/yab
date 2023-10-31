@@ -2,12 +2,11 @@ package docs
 
 import (
 	"fmt"
-	"os"
-	"strconv"
 	"strings"
 
 	"github.com/charmbracelet/glamour"
 	"selene.frankmayer.io/extensions"
+	"selene.frankmayer.io/util"
 )
 
 type Function struct {
@@ -32,12 +31,7 @@ var functions = []Function{
 }
 
 func Help() {
-	term_width := os.Getenv("COLUMNS")
-
-	width, err := strconv.Atoi(term_width)
-	if err != nil {
-		width = 80
-	}
+	width := util.TermWidth()
 
 	r, _ := glamour.NewTermRenderer(
 		glamour.WithAutoStyle(),
@@ -55,19 +49,19 @@ func Markdown() string {
 	var sb strings.Builder
 	sb.WriteString("# Documentation\n\n")
 
-	bin_name := os.Args[0]
-	if len(bin_name) > 24 {
-		bin_name = "selene"
-	}
+	bin_name := util.BinName()
+
 	sb.WriteString("## Usage:\n\n")
 	sb.WriteString(bin_name + " [configs ...]\n\n")
 	sb.WriteString(bin_name + " [configs ...] -- [args ...]\n\n")
 
 	sb.WriteString("## Command Line Arguments\n\n")
-	sb.WriteString(bin_name + " [--version, -v]\n\n")
+	sb.WriteString("**" + bin_name + " [--version, -v]**\n\n")
 	sb.WriteString("Prints the version of the program.\n\n")
-	sb.WriteString(bin_name + " [--help, -h]\n\n")
+	sb.WriteString("**" + bin_name + " [--help, -h]**\n\n")
 	sb.WriteString("Prints this help.\n\n")
+	sb.WriteString("**" + bin_name + " --init**\n\n")
+	sb.WriteString("Initializes a new Selene project.\n\n")
 
 	sb.WriteString("## Lua API Functions\n\n")
 	for _, f := range functions {
@@ -79,9 +73,9 @@ func Markdown() string {
 
 func addFunction(f *Function) string {
 	var sb strings.Builder
-	sb.WriteString("### " + extensions.Name(f.Name) + "\n")
+	sb.WriteString("**" + extensions.Name(f.Name) + "**\n")
 	sb.WriteString(f.Description + "\n\n")
-	sb.WriteString("#### Parameters\n\n")
+	sb.WriteString("Parameters\n\n")
 	if len(f.Parameters) > 0 {
 		for _, p := range f.Parameters {
 			sb.WriteString("* " + p + "\n")
@@ -90,7 +84,7 @@ func addFunction(f *Function) string {
 		sb.WriteString("None\n")
 	}
 	sb.WriteString("\n")
-	sb.WriteString("#### Returns\n\n")
+	sb.WriteString("Returns\n\n")
 	switch len(f.Returns) {
 	case 0:
 		sb.WriteString("None\n")

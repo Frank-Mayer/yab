@@ -8,35 +8,41 @@ selene [configs ...] -- [args ...]
 
 ## Command Line Arguments
 
-selene [--version, -v]
+**selene [--version, -v]**
 
 Prints the version of the program.
 
-selene [--help, -h]
+**selene [--help, -h]**
 
 Prints this help.
 
+**selene --init**
+
+Initializes a new Selene project.
+
 ## Lua API Functions
 
-### selene_os_type
+**selene_os_type**
 Returns the operating system type.
 
-#### Parameters
+Parameters
 
 None
 
-#### Returns
+Returns
 
 "windows" or "unix" on the respective system.
 
-### selene_args
+**selene_args**
 Returns the command line arguments passed to the program.
 
-#### Parameters
+Parameters
 
 None
 
-#### Returns
+Returns
 
 A table containing the command line arguments.
+
+nd line arguments.
 
