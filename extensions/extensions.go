@@ -63,4 +63,6 @@ func RegisterExtensions(l *lua.State) {
 	}
 
 	l.SetGlobal("Selene")
+
+	addMissingStringFunctions(l)
 }
