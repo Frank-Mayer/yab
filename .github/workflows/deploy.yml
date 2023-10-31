@@ -35,7 +35,7 @@ jobs:
       - name: Tidy
         run: go mod tidy
       - name: Build
-        run: go build -o selene-windows-amd64.exe main.go
+        run: go build -o selene-windows-amd64.exe main/main.go
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -54,7 +54,7 @@ jobs:
       - name: Tidy
         run: go mod tidy
       - name: Build
-        run: go build -o selene-darwin-amd64 main.go
+        run: go build -o selene-darwin-amd64 main/main.go
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -73,7 +73,7 @@ jobs:
       - name: Tidy
         run: go mod tidy
       - name: Build
-        run: go build -o selene-debian-amd64 main.go
+        run: go build -o selene-debian-amd64 main/main.go
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
