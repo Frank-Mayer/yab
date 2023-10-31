@@ -1,9 +1,5 @@
 # Selene
 
-<a href="https://en.wikipedia.org/wiki/Selene#/media/File:Clipeus_Selene_Terme.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Clipeus_Selene_Terme.jpg" alt="Clipeus Selene Terme" align="right" style="height: 6em; float: right;" />
-</a>
-
 Wouldn't it be great if you could use the same build tool for every project?
 Regardless of operating system, programming language...
 
@@ -60,3 +56,15 @@ selene first second third
     <li><a download="selene" href="https://frank-mayer.github.io/selene/selene-darwin-amd64">Darwin amd64</a></li>
     <li><a download="selene" href="https://frank-mayer.github.io/selene/selene-debian-amd64">Debian amd64</a></li>
 </ul>
+
+## Etymology
+
+<a href="https://en.wikipedia.org/wiki/Selene#/media/File:Clipeus_Selene_Terme.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Clipeus_Selene_Terme.jpg" alt="Clipeus Selene Terme" align="right" style="height: 6em; float: right;" />
+</a>
+
+> In ancient Greek mythology and religion, Selene (/sɪˈliːniː/; Greek: Σελήνη pronounced [selɛ̌ːnɛː] seh-LEH-neh, meaning "Moon") is the goddess and personification of the Moon.
+> Also known as Mene, she is traditionally the daughter of the Titans Hyperion and Theia, and sister of the sun god Helios and the dawn goddess Eos.
+> She drives her moon chariot across the heavens.
+> 
+> https://en.wikipedia.org/wiki/Selene
