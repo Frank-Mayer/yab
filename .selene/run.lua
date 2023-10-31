@@ -1,1 +1,1 @@
-os.execute("go run main.go")
+os.execute("go run main/main.go")

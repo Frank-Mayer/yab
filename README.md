@@ -8,6 +8,10 @@ Selene is a versatile and user-friendly build tool configured in Lua, designed t
 
 Looking for an example? Take a look at [this projects `.selene` folder](https://github.com/Frank-Mayer/selene/tree/main/.selene).
 
+## Docs
+
+Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/selene/blob/main/DOCS.md) file.
+
 ## Usage
 
 ```bash
@@ -38,11 +42,3 @@ If there is no init file, it will be created.
 - [Windows amd64](https://frank-mayer.github.io/selene/selene-windows-amd64.exe)
 - [Darwin amd64](https://frank-mayer.github.io/selene/selene-darwin-amd64)
 - [Debian amd64](https://frank-mayer.github.io/selene/selene-debian-amd64)
-
-## Lua API
-
-### selene_os_type
-
-Parameter: None.
-
-Returns: "windows" or "unix" on the respective system.
