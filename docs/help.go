@@ -73,7 +73,7 @@ func Markdown() string {
 
 func addFunction(f *Function) string {
 	var sb strings.Builder
-	sb.WriteString("### " + extensions.Name(f.Name) + "\n\n")
+	sb.WriteString("### 𝑓 " + extensions.Name(f.Name) + "\n\n")
 	sb.WriteString("*" + f.Description + "*\n\n")
 	sb.WriteString("**Parameters:** ")
 	if len(f.Parameters) > 0 {

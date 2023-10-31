@@ -22,7 +22,7 @@ Initializes a new Selene project.
 
 ## Lua API Functions
 
-### selene_os_type
+### 𝑓 selene_os_type
 
 *Returns the operating system type.*
 
@@ -30,7 +30,7 @@ Initializes a new Selene project.
 
 **Returns:** "windows" or "unix" on the respective system.
 
-### selene_args
+### 𝑓 selene_args
 
 *Returns the command line arguments passed to the program.*
 
