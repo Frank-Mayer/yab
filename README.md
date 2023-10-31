@@ -12,6 +12,14 @@ Looking for an example? Take a look at [this projects `.selene` folder](https://
 
 Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/selene/blob/main/DOCS.md) file.
 
+## Badge
+
+[![Selene Project](https://img.shields.io/badge/Selene_Project-2C2D72?logo=lua)](https://github.com/Frank-Mayer/selene)
+
+```markdown
+[![Selene Project](https://img.shields.io/badge/Selene_Project-2C2D72?logo=lua)](https://github.com/Frank-Mayer/selene)
+```
+
 ## Usage
 
 Run a specified sript:
