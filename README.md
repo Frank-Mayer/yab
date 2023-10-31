@@ -55,6 +55,8 @@ selene first second third
 
 ## Download
 
-- [Windows amd64](https://frank-mayer.github.io/selene/selene-windows-amd64.exe)
-- [Darwin amd64](https://frank-mayer.github.io/selene/selene-darwin-amd64)
-- [Debian amd64](https://frank-mayer.github.io/selene/selene-debian-amd64)
+<ul>
+    <li><a download="selene.exe" href="https://frank-mayer.github.io/selene/selene-windows-amd64.exe">Windows amd64</a></li>
+    <li><a download="selene" href="https://frank-mayer.github.io/selene/selene-darwin-amd64">Darwin amd64</a></li>
+    <li><a download="selene" href="https://frank-mayer.github.io/selene/selene-debian-amd64">Debian amd64</a></li>
+</ul>
