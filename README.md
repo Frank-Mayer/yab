@@ -14,28 +14,23 @@ Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/selene/blob/mai
 
 ## Usage
 
+Run a specified sript:
+
 ```bash
 selene build
 ```
 
-Checks of one of the following files exist and runs it:
+Checks if one of the following files exist and runs it:
 
 1. `./.selene/build.lua`
 1. `$XDG_CONFIG_HOME/selene/build.lua`
 1. `$APPDATA/selene/build.lua`
 
+You can specify multiple arguments, which will be executed in the order in which they appear:
+
 ```bash
 selene first second third
 ```
-
-You can specify multiple arguments, which will be executed in the order in which they appear.
-
-```bash
-selene
-```
-
-If you dont provide any argument `init` is the default.
-If there is no init file, it will be created.
 
 ## Download
 
