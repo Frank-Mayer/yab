@@ -1,4 +1,4 @@
-# selene
+# Selene
 
 <a href="https://en.wikipedia.org/wiki/Selene#/media/File:Clipeus_Selene_Terme.jpg">
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Clipeus_Selene_Terme.jpg" alt="Clipeus Selene Terme" align="right" style="height: 6em; float: right;" />
@@ -11,13 +11,13 @@ Selene is just that.
 
 Use Lua scripts to define specific actions and execute them from the command line.
 
-**Doesn't that already exist?**
+**Does that not already exist?**
 
 The build tools Bazel and Gradle served as an example.
 However, Gradle is only used in the Java ecosystem and Bazel is very complicated.
 Both use a domain-specific language, which complicates familiarization and makes it difficult to find help.
 
-Lua is a common and performant language that is used, for example, to configure Neovim.
+Lua is a common and performant language that is used, for example, to configure [Neovim](https://github.com/neovim) or build World of Warcraft Mods.
 
 Looking for an example configuration? Take a look at [this projects `.selene` folder](https://github.com/Frank-Mayer/selene/tree/main/.selene).
 
