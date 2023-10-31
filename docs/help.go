@@ -73,9 +73,9 @@ func Markdown() string {
 
 func addFunction(f *Function) string {
 	var sb strings.Builder
-	sb.WriteString("**" + extensions.Name(f.Name) + "**\n\n")
-	sb.WriteString(f.Description + "\n\n")
-	sb.WriteString("Parameters: ")
+	sb.WriteString("### " + extensions.Name(f.Name) + "\n\n")
+	sb.WriteString("*" + f.Description + "*\n\n")
+	sb.WriteString("**Parameters:** ")
 	if len(f.Parameters) > 0 {
 		sb.WriteString("\n")
 		for _, p := range f.Parameters {
@@ -85,7 +85,7 @@ func addFunction(f *Function) string {
 		sb.WriteString("None\n")
 	}
 	sb.WriteString("\n")
-	sb.WriteString("Returns: ")
+	sb.WriteString("**Returns:** ")
 	switch len(f.Returns) {
 	case 0:
 		sb.WriteString("None\n")

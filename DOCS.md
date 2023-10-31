@@ -22,19 +22,19 @@ Initializes a new Selene project.
 
 ## Lua API Functions
 
-**selene_os_type**
+### selene_os_type
 
-Returns the operating system type.
+*Returns the operating system type.*
 
-Parameters: None
+**Parameters:** None
 
-Returns: "windows" or "unix" on the respective system.
+**Returns:** "windows" or "unix" on the respective system.
 
-**selene_args**
+### selene_args
 
-Returns the command line arguments passed to the program.
+*Returns the command line arguments passed to the program.*
 
-Parameters: None
+**Parameters:** None
 
-Returns: A table containing the command line arguments.
+**Returns:** A table containing the command line arguments.
 
