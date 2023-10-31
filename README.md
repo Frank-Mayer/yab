@@ -4,9 +4,22 @@
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Clipeus_Selene_Terme.jpg" alt="Clipeus Selene Terme" align="right" style="height: 6em; float: right;" />
 </a>
 
-Selene is a versatile and user-friendly build tool configured in Lua, designed to streamline your development workflow. Whether you're compiling, packaging, or automating tasks, Selene empowers you to define and manage your build process with ease. Say goodbye to complex configuration files and hello to the simplicity and flexibility of Lua. Get started today and unlock the full potential of your projects!
+Wouldn't it be great if you could use the same build tool for every project?
+Regardless of operating system, programming language...
 
-Looking for an example? Take a look at [this projects `.selene` folder](https://github.com/Frank-Mayer/selene/tree/main/.selene).
+Selene is just that.
+
+Use Lua scripts to define specific actions and execute them from the command line.
+
+**Doesn't that already exist?**
+
+The build tools Bazel and Gradle served as an example.
+However, Gradle is only used in the Java ecosystem and Bazel is very complicated.
+Both use a domain-specific language, which complicates familiarization and makes it difficult to find help.
+
+Lua is a common and performant language that is used, for example, to configure Neovim.
+
+Looking for an example configuration? Take a look at [this projects `.selene` folder](https://github.com/Frank-Mayer/selene/tree/main/.selene).
 
 ## Docs
 
