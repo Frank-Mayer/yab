@@ -129,7 +129,7 @@ func get_config_path() (string, error) {
 	}
 
 	// check for appdata
-	if appdata := path.Join(os.Getenv("APPDATA"), init); appdata != "" {
+	if appdata := path.Join(os.Getenv("APPDATA"), "selene"); appdata != "" {
 		if _, err := os.Stat(appdata); !os.IsNotExist(err) {
 			return appdata, nil
 		}
