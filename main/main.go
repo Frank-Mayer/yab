@@ -151,13 +151,13 @@ func initProject() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		return
 	} else if err != nil {
 		log.Fatal(err)
 	} else if !f.IsDir() {
 		log.Fatal(".selene is not a directory")
 	}
 	log.Warn(".selene already exists")
-	os.Exit(0)
 }
 
 func initDemoConfig() error {
