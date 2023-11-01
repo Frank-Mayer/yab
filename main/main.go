@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/Shopify/go-lua"
 	"github.com/charmbracelet/log"
@@ -97,7 +98,7 @@ func runLuaFile(config_path string, init_file string) error {
 
 	// set package.path to config folder
 	package_path := path.Join(config_path, "?.lua")
-	setup_code := "package.path = '" + package_path + ";'"
+	setup_code := "package.path = '" + strings.ReplaceAll(package_path, "\\", "\\\\") + ";'"
 	err := lua.DoString(l, setup_code)
 	if err != nil {
 		log.Error("Error setting up lua", "error", err, "code", setup_code)
