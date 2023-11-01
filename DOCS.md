@@ -86,3 +86,20 @@ Updates the Selene binary to the latest version.
 
 **Returns:** The output of the command.
 
+### 𝑓 js_run
+
+*Run a script from the `package.json` file using the first javascript package manager found. Trying pnpm, yarn, bun and npm in that order.*
+
+**Parameters:** 
+* script
+
+**Returns:** true if a javascript package manager was found, false otherwise.
+
+### 𝑓 js_install
+
+*Install dependencies from `package.json` using the first javascript package manager found. Trying pnpm, yarn, bun and npm in that order.*
+
+**Parameters:** None
+
+**Returns:** true if a javascript package manager was found, false otherwise.
+

@@ -16,14 +16,14 @@ var Functions = []Function{
 		"Returns the operating system type.",
 		[]string{},
 		[]string{"\"windows\", \"linux\" or \"darwin\" on the respective system."},
-		os_type,
+		osType,
 	},
 	{
 		"os_arch",
 		"Returns the operating system architecture.",
 		[]string{},
 		[]string{"\"amd64\" or \"arm64\" on the respective system."},
-		os_arch,
+		osArch,
 	},
 	{
 		"args",
@@ -59,6 +59,20 @@ var Functions = []Function{
 		[]string{"command"},
 		[]string{"The output of the command."},
 		stderr,
+	},
+	{
+		"js_run",
+		"Run a script from the `package.json` file using the first javascript package manager found. Trying pnpm, yarn, bun and npm in that order.",
+		[]string{"script"},
+		[]string{"true if a javascript package manager was found, false otherwise."},
+		jsRun,
+	},
+	{
+		"js_install",
+		"Install dependencies from `package.json` using the first javascript package manager found. Trying pnpm, yarn, bun and npm in that order.",
+		[]string{},
+		[]string{"true if a javascript package manager was found, false otherwise."},
+		jsInstall,
 	},
 }
 

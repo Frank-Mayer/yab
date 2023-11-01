@@ -6,7 +6,7 @@ import (
 	"github.com/Shopify/go-lua"
 )
 
-func os_type(l *lua.State) int {
+func osType(l *lua.State) int {
 	l.PushString(runtime.GOOS)
 	return 1
 }
