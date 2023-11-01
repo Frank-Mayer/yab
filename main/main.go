@@ -96,8 +96,11 @@ func runLuaFile(config_path string, init_file string) error {
 	extensions.RegisterExtensions(l)
 
 	// set package.path to config folder
-	err := lua.DoString(l, "package.path = '"+config_path+"/?.lua;'")
+	package_path := path.Join(config_path, "?.lua")
+	setup_code := "package.path = '" + package_path + ";'"
+	err := lua.DoString(l, setup_code)
 	if err != nil {
+		log.Error("Error setting up lua", "error", err, "code", setup_code)
 		return err
 	}
 
@@ -111,16 +114,15 @@ func runLuaFile(config_path string, init_file string) error {
 }
 
 func get_config_path() (string, error) {
-	init := "./.selene"
+	init := path.Join(".", ".selene")
 
 	// check for current directory
 	if _, err := os.Stat(init); !os.IsNotExist(err) {
 		return init, nil
 	}
 
-	init = "./selene"
 	// check for XDG_CONFIG_HOME
-	if config_home := path.Join(os.Getenv("XDG_CONFIG_HOME"), init); config_home != "" {
+	if config_home := path.Join(os.Getenv("XDG_CONFIG_HOME"), "selene"); config_home != "" {
 		if _, err := os.Stat(config_home); !os.IsNotExist(err) {
 			return config_home, nil
 		}
@@ -158,7 +160,7 @@ func initProject() {
 }
 
 func initDemoConfig() error {
-	filename := ".selene/hello.lua"
+	filename := path.Join(".selene", "hello.lua")
 	f, err := os.Create(filename)
 	if err != nil {
 		return err
