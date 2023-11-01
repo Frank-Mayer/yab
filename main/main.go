@@ -7,6 +7,7 @@ import (
 	"path"
 
 	"github.com/Shopify/go-lua"
+	"github.com/charmbracelet/log"
 	"selene.frankmayer.io/docs"
 	"selene.frankmayer.io/extensions"
 	"selene.frankmayer.io/util"
@@ -18,8 +19,7 @@ func main() {
 	// find config folder
 	config_path, err := get_config_path()
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 
 	// process arguments
@@ -31,9 +31,8 @@ func main() {
 
 	// if no args, exit
 	if len(argsWithoutProg) == 0 {
-		fmt.Println("No arguments given")
 		docs.Help()
-		os.Exit(1)
+		log.Fatal("No arguments given")
 	}
 
 	// check for -- to pass args to lua
@@ -56,14 +55,11 @@ func main() {
 		file := argsWithoutProg[i]
 		init_file, err := getInitFile(config_path, file)
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			log.Fatal(err)
 		}
 		err = runLuaFile(config_path, init_file)
 		if err != nil {
-			fmt.Println("Error running file: ", file)
-			fmt.Println(err)
-			os.Exit(1)
+			log.Fatal("Error running file: "+file, "error", err)
 		}
 	}
 }
@@ -78,6 +74,9 @@ func treatSpecialArgs(arg0 string) {
 		os.Exit(0)
 	case "--init":
 		initProject()
+		os.Exit(0)
+	case "--update", "--upgrade", "-u":
+		util.Update()
 		os.Exit(0)
 	}
 }
@@ -97,7 +96,7 @@ func runLuaFile(config_path string, init_file string) error {
 	extensions.RegisterExtensions(l)
 
 	// set package.path to config folder
-	err := lua.DoString(l, fmt.Sprintf("package.path = '%s/?.lua;'", config_path))
+	err := lua.DoString(l, "package.path = '"+config_path+"/?.lua;'")
 	if err != nil {
 		return err
 	}
@@ -142,24 +141,19 @@ func initProject() {
 	if os.IsNotExist(err) {
 		err = os.Mkdir(".selene", 0775)
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			log.Fatal(err)
 		}
-		fmt.Println("Created .selene")
+		log.Info("Created .selene")
 		err = initDemoConfig()
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			log.Fatal(err)
 		}
-		os.Exit(0)
 	} else if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatal(err)
 	} else if !f.IsDir() {
-		fmt.Println(".selene is not a directory")
-		os.Exit(1)
+		log.Fatal(".selene is not a directory")
 	}
-	fmt.Println(".selene already exists")
+	log.Warn(".selene already exists")
 	os.Exit(0)
 }
 
@@ -171,7 +165,7 @@ func initDemoConfig() error {
 	}
 	defer f.Close()
 	f.WriteString("print('Hello, world!')")
-	fmt.Println("Created", filename)
-	fmt.Println("Run with `" + util.BinName() + " hello`")
+	log.Info("Created", filename)
+	log.Info("Run with `" + util.BinName() + " hello`")
 	return nil
 }

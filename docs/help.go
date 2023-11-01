@@ -41,6 +41,8 @@ func Markdown() string {
 	sb.WriteString("Prints this help.\n\n")
 	sb.WriteString("**" + bin_name + " --init**\n\n")
 	sb.WriteString("Initializes a new Selene project.\n\n")
+	sb.WriteString("**" + bin_name + " [--update, --upgrade, -u]**\n\n")
+	sb.WriteString("Updates the Selene binary to the latest version.\n\n")
 
 	sb.WriteString("## Lua API Functions (in the `Selene` global table)\n\n")
 	for _, f := range extensions.Functions {

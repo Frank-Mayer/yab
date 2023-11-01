@@ -20,6 +20,10 @@ Prints this help.
 
 Initializes a new Selene project.
 
+**selene [--update, --upgrade, -u]**
+
+Updates the Selene binary to the latest version.
+
 ## Lua API Functions (in the `Selene` global table)
 
 ### 𝑓 os_type
@@ -28,7 +32,15 @@ Initializes a new Selene project.
 
 **Parameters:** None
 
-**Returns:** "windows" or "unix" on the respective system.
+**Returns:** "windows", "linux" or "darwin" on the respective system.
+
+### 𝑓 os_arch
+
+*Returns the operating system architecture.*
+
+**Parameters:** None
+
+**Returns:** "amd64" or "arm64" on the respective system.
 
 ### 𝑓 args
 

@@ -11,11 +11,19 @@ type Function struct {
 }
 
 var Functions = []Function{
-	{"os_type",
+	{
+		"os_type",
 		"Returns the operating system type.",
 		[]string{},
-		[]string{"\"windows\" or \"unix\" on the respective system."},
+		[]string{"\"windows\", \"linux\" or \"darwin\" on the respective system."},
 		os_type,
+	},
+	{
+		"os_arch",
+		"Returns the operating system architecture.",
+		[]string{},
+		[]string{"\"amd64\" or \"arm64\" on the respective system."},
+		os_arch,
 	},
 	{
 		"args",
