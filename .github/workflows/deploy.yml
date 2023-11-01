@@ -59,6 +59,12 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           path: "./selene-darwin-amd64"
+      - name: Build ARM
+        run: env GOARCH=arm64 go build -o selene-darwin-arm64 main/main.go
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path: "./selene-darwin-arm64"
   ubuntu:
     runs-on: ubuntu-latest
     steps:
@@ -73,11 +79,17 @@ jobs:
       - name: Tidy
         run: go mod tidy
       - name: Build
-        run: go build -o selene-debian-amd64 main/main.go
+        run: go build -o selene-linux-amd64 main/main.go
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          path: "./selene-debian-amd64"
+          path: "./selene-linux-amd64"
+      - name: Build ARM
+        run: env GOARCH=arm64 go build -o selene-linux-arm64 main/main.go
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path: "./selene-linux-arm64"
   deploy:
     needs:
       - win

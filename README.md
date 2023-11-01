@@ -54,7 +54,9 @@ selene first second third
 <ul>
     <li><a download="selene.exe" href="https://frank-mayer.github.io/selene/selene-windows-amd64.exe">Windows amd64</a></li>
     <li><a download="selene" href="https://frank-mayer.github.io/selene/selene-darwin-amd64">Darwin amd64</a></li>
-    <li><a download="selene" href="https://frank-mayer.github.io/selene/selene-debian-amd64">Debian amd64</a></li>
+    <li><a download="selene" href="https://frank-mayer.github.io/selene/selene-darwin-arm64">Darwin arm64</a></li>
+    <li><a download="selene" href="https://frank-mayer.github.io/selene/selene-linux-amd64">Debian amd64</a></li>
+    <li><a download="selene" href="https://frank-mayer.github.io/selene/selene-linux-arm64">Debian arm64</a></li>
 </ul>
 
 ## Etymology
@@ -66,5 +68,5 @@ selene first second third
 > In ancient Greek mythology and religion, Selene (/sɪˈliːniː/; Greek: Σελήνη pronounced [selɛ̌ːnɛː] seh-LEH-neh, meaning "Moon") is the goddess and personification of the Moon.
 > Also known as Mene, she is traditionally the daughter of the Titans Hyperion and Theia, and sister of the sun god Helios and the dawn goddess Eos.
 > She drives her moon chariot across the heavens.
-> 
+>
 > https://en.wikipedia.org/wiki/Selene
