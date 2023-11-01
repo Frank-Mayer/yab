@@ -16,12 +16,6 @@ import (
 const version = "0.1.0"
 
 func main() {
-	// find config folder
-	config_path, err := get_config_path()
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	// process arguments
 	argsWithoutProg := os.Args[1:]
 
@@ -49,6 +43,12 @@ func main() {
 		}
 	}
 	extensions.SetArgs(pass_args_list)
+
+	// find config folder
+	config_path, err := get_config_path()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// run each file passed as an argument
 	for i := 0; i < arg_separator_index; i++ {
