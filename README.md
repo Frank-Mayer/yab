@@ -49,6 +49,13 @@ You can specify multiple arguments, which will be executed in the order in which
 selene first second third
 ```
 
+## GitHub Actions
+
+```yaml
+- name: Setup Selene
+  uses: Frank-Mayer/selene-setup@v1.0.0
+```
+
 ## Download
 
 <ul>
