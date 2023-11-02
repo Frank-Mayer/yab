@@ -31,23 +31,23 @@ Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/selene/blob/mai
 
 ## Usage
 
-Run a specified sript:
+Run one or more sripts:
 
 ```bash
-selene build
+selene [configs ...]
 ```
 
-Checks if one of the following files exist and runs it:
-
-1. `./.selene/build.lua`
-1. `$XDG_CONFIG_HOME/selene/build.lua`
-1. `$APPDATA/selene/build.lua`
-
-You can specify multiple arguments, which will be executed in the order in which they appear:
+Pass arguments to the scripts:
 
 ```bash
-selene first second third
+selene [configs ...] -- [args ...]
 ```
+
+The following folders are searched for configs:
+
+1. `./.selene/`
+1. `$XDG_CONFIG_HOME/selene/`
+1. `$APPDATA/selene/`
 
 ## GitHub Actions
 
