@@ -58,9 +58,9 @@ The following folders are searched for configs:
 
 ## Download
 
-- Darwin [amd64](https://frank-mayer.github.io/selene/selene-darwin-amd64) [arm64](https://frank-mayer.github.io/selene/selene-darwin-arm64)
-- Debian [amd64](https://frank-mayer.github.io/selene/selene-linux-amd64) [arm64](https://frank-mayer.github.io/selene/selene-linux-arm64)
-- Windows [amd64](https://frank-mayer.github.io/selene/selene-windows-amd64.exe) [arm64](https://frank-mayer.github.io/selene/selene-windows-arm64.exe)
+- Darwin&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-darwin-amd64)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-darwin-arm64)
+- Debian&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-linux-amd64)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-linux-arm64)
+- Windows&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-windows-amd64.exe)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-windows-arm64.exe)
 
 ## Etymology
 
