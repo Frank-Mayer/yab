@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"selene.frankmayer.io/docs"
+	"selene.frankmayer.dev/docs"
 )
 
 func main() {

@@ -9,9 +9,9 @@ import (
 
 	"github.com/Shopify/go-lua"
 	"github.com/charmbracelet/log"
-	"selene.frankmayer.io/docs"
-	"selene.frankmayer.io/extensions"
-	"selene.frankmayer.io/util"
+	"selene.frankmayer.dev/docs"
+	"selene.frankmayer.dev/extensions"
+	"selene.frankmayer.dev/util"
 )
 
 const version = "0.1.0"

@@ -1,4 +1,4 @@
-module selene.frankmayer.io
+module selene.frankmayer.dev
 
 go 1.21.3
 

@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/charmbracelet/glamour"
-	"selene.frankmayer.io/extensions"
-	"selene.frankmayer.io/util"
+	"selene.frankmayer.dev/extensions"
+	"selene.frankmayer.dev/util"
 )
 
 func Help() {
