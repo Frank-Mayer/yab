@@ -55,7 +55,7 @@ Updates the Selene binary to the latest version.
 *Checks if an executable is available in the system's PATH.*
 
 **Parameters:** 
-* executable
+* executable: *string*
 
 **Returns:** true if the executable is available, false otherwise.
 
@@ -64,7 +64,7 @@ Updates the Selene binary to the latest version.
 *Call a shell command and return the full output (stdout + stderr) in one string.*
 
 **Parameters:** 
-* command
+* command: *string*
 
 **Returns:** The output of the command.
 
@@ -73,7 +73,7 @@ Updates the Selene binary to the latest version.
 *Call a shell command and return the output (stdout) in one string.*
 
 **Parameters:** 
-* command
+* command: *string*
 
 **Returns:** The output of the command.
 
@@ -82,7 +82,7 @@ Updates the Selene binary to the latest version.
 *Call a shell command and return the error output (stderr) in one string.*
 
 **Parameters:** 
-* command
+* command: *string*
 
 **Returns:** The output of the command.
 
@@ -91,7 +91,7 @@ Updates the Selene binary to the latest version.
 *Run a script from the `package.json` file using the first javascript package manager found. Trying pnpm, yarn, bun and npm in that order.*
 
 **Parameters:** 
-* script
+* script: *string*
 
 **Returns:** true if a javascript package manager was found, false otherwise.
 
