@@ -29,6 +29,29 @@ Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/selene/blob/mai
 [![Selene Project](https://img.shields.io/badge/Selene_Project-2C2D72?logo=lua)](https://github.com/Frank-Mayer/selene)
 ```
 
+## Download
+
+- Darwin&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-darwin-amd64)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-darwin-arm64)
+- Debian&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-linux-amd64)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-linux-arm64)
+- Windows&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-windows-amd64.exe)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-windows-arm64.exe)
+
+## Quickstart
+
+[Download](#download) the latest binary for your os and architecture.
+
+Place the downloaded binary wherever you want.
+To be able to use the self-update functionality ensure that access rights aren’t a problem.
+
+Raname the binary to `selene.exe`/`selene` depending on your OS (if you don’t want to alwys type your OS name and architecture).
+
+Ensure that the location of the binary is available in the `PATH` environment variable to make it globally available.
+
+Remember to restart your shell session after changing any environment variables.
+
+Try `selene --version` to check if the istallation was successful.
+
+Use `selene --help` to see the documentation of your installed version.
+
 ## Usage
 
 Run one or more sripts:
@@ -55,12 +78,6 @@ The following folders are searched for configs:
 - name: Setup Selene
   uses: Frank-Mayer/selene-setup@v1.0.0
 ```
-
-## Download
-
-- Darwin&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-darwin-amd64)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-darwin-arm64)
-- Debian&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-linux-amd64)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-linux-arm64)
-- Windows&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-windows-amd64.exe)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-windows-arm64.exe)
 
 ## Etymology
 
