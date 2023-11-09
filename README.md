@@ -36,7 +36,7 @@ Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/selene/blob/mai
 Place the downloaded binary wherever you want.
 To be able to use the self-update functionality ensure that access rights aren’t a problem.
 
-Raname the binary to `selene.exe`/`selene` depending on your OS (if you don’t want to alwys type your OS name and architecture).
+Rename the binary to `selene.exe`/`selene` depending on your OS (if you don’t want to alwys type your OS name and architecture).
 
 Ensure that the location of the binary is available in the `PATH` environment variable to make it globally available.
 
