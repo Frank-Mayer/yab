@@ -37,7 +37,7 @@ Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/selene/blob/mai
 
 ## Quickstart
 
-[Download](#download) the latest binary for your os and architecture.
+[Download](https://frank-mayer.github.io/selene/) the latest binary for your os and architecture.
 
 Place the downloaded binary wherever you want.
 To be able to use the self-update functionality ensure that access rights aren’t a problem.
