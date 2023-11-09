@@ -29,12 +29,6 @@ Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/selene/blob/mai
 [![Selene Project](https://img.shields.io/badge/Selene_Project-2C2D72?logo=lua)](https://github.com/Frank-Mayer/selene)
 ```
 
-## Download
-
-- Darwin&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-darwin-amd64)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-darwin-arm64)
-- Debian&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-linux-amd64)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-linux-arm64)
-- Windows&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-windows-amd64.exe)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-windows-arm64.exe)
-
 ## Quickstart
 
 [Download](https://frank-mayer.github.io/selene/) the latest binary for your os and architecture.
@@ -78,6 +72,12 @@ The following folders are searched for configs:
 - name: Setup Selene
   uses: Frank-Mayer/selene-setup@v1.0.0
 ```
+
+## Download
+
+- Darwin&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-darwin-amd64)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-darwin-arm64)
+- Debian&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-linux-amd64)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-linux-arm64)
+- Windows&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-windows-amd64.exe)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-windows-arm64.exe)
 
 ## Etymology
 
