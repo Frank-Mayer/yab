@@ -7,14 +7,14 @@ import (
 	"path"
 	"strings"
 
-	"github.com/Shopify/go-lua"
+"github.com/yuin/gopher-lua"
 	"github.com/charmbracelet/log"
 	"selene.frankmayer.dev/docs"
 	"selene.frankmayer.dev/extensions"
 	"selene.frankmayer.dev/util"
 )
 
-const version = "0.1.0"
+const version = "0.2.0"
 
 func main() {
 	// process arguments
@@ -93,20 +93,20 @@ func getInitFile(config_path string, file string) (string, error) {
 func runLuaFile(config_path string, init_file string) error {
 	// setup lua
 	l := lua.NewState()
-	lua.OpenLibraries(l)
+    defer l.Close()
 	extensions.RegisterExtensions(l)
 
 	// set package.path to config folder
 	package_path := path.Join(config_path, "?.lua")
 	setup_code := "package.path = '" + strings.ReplaceAll(package_path, "\\", "\\\\") + ";'"
-	err := lua.DoString(l, setup_code)
+	err := l.DoString(setup_code)
 	if err != nil {
 		log.Error("Error setting up lua", "error", err, "code", setup_code)
 		return err
 	}
 
 	// run lua file
-	err = lua.DoFile(l, init_file)
+	err = l.DoFile(init_file)
 	if err != nil {
 		return err
 	}

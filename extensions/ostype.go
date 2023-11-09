@@ -3,10 +3,10 @@ package extensions
 import (
 	"runtime"
 
-	"github.com/Shopify/go-lua"
+	"github.com/yuin/gopher-lua"
 )
 
-func osType(l *lua.State) int {
-	l.PushString(runtime.GOOS)
+func osType(l *lua.LState) int {
+	l.Push(lua.LString(runtime.GOOS))
 	return 1
 }

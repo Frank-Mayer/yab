@@ -4,17 +4,17 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/Shopify/go-lua"
+	"github.com/yuin/gopher-lua"
 )
 
 // call a shell command and return the full output (stdout + stderr) in one string
-func stdall(l *lua.State) int {
-	command := lua.CheckString(l, 1)
+func stdall(l *lua.LState) int {
+	command := l.CheckString(1)
 	parts := strings.Fields(command)
 
 	// Check if there are any parts
 	if len(parts) == 0 {
-		l.PushString("")
+		l.Push(lua.LString(""))
 		return 1
 	}
 
@@ -26,21 +26,21 @@ func stdall(l *lua.State) int {
 
 	out, err := exec.Command(name, args...).CombinedOutput()
 	if err != nil {
-		l.PushString(err.Error())
+		l.Push(lua.LString(err.Error()))
 		return 1
 	}
-	l.PushString(string(out))
+	l.Push(lua.LString(string(out)))
 	return 1
 }
 
 // call a shell command and return the output (stdout) in one string
-func stdout(l *lua.State) int {
-	command := lua.CheckString(l, 1)
+func stdout(l *lua.LState) int {
+	command := l.CheckString(1)
 	parts := strings.Fields(command)
 
 	// Check if there are any parts
 	if len(parts) == 0 {
-		l.PushString("")
+		l.Push(lua.LString(""))
 		return 1
 	}
 
@@ -52,21 +52,21 @@ func stdout(l *lua.State) int {
 
 	out, err := exec.Command(name, args...).Output()
 	if err != nil {
-		l.PushString(err.Error())
+		l.Push(lua.LString(err.Error()))
 		return 1
 	}
-	l.PushString(string(out))
+	l.Push(lua.LString(string(out)))
 	return 1
 }
 
 // call a shell command and return the error (stderr) in one string
-func stderr(l *lua.State) int {
-	command := lua.CheckString(l, 1)
+func stderr(l *lua.LState) int {
+	command := l.CheckString(1)
 	parts := strings.Fields(command)
 
 	// Check if there are any parts
 	if len(parts) == 0 {
-		l.PushString("")
+		l.Push(lua.LString(""))
 		return 1
 	}
 
@@ -78,9 +78,9 @@ func stderr(l *lua.State) int {
 
 	out, err := exec.Command(name, args...).CombinedOutput()
 	if err != nil {
-		l.PushString(err.Error())
+		l.Push(lua.LString(err.Error()))
 		return 1
 	}
-	l.PushString(string(out))
+	l.Push(lua.LString(string(out)))
 	return 1
 }

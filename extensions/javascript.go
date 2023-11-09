@@ -4,7 +4,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/Shopify/go-lua"
+	"github.com/yuin/gopher-lua"
 )
 
 type jsPackageManager uint8
@@ -22,9 +22,9 @@ func findJsPackageManager() jsPackageManager {
 		return pnpm
 	}
 
-    if _, err := exec.LookPath("yarn"); err == nil {
-        return yarn
-    }
+	if _, err := exec.LookPath("yarn"); err == nil {
+		return yarn
+	}
 
 	if _, err := exec.LookPath("bun"); err == nil {
 		return bun
@@ -37,8 +37,8 @@ func findJsPackageManager() jsPackageManager {
 	return none
 }
 
-func jsRun(l *lua.State) int {
-	script := lua.CheckString(l, 1)
+func jsRun(l *lua.LState) int {
+	script := l.CheckString(1)
 	var command string
 	switch findJsPackageManager() {
 	case yarn:
@@ -50,7 +50,7 @@ func jsRun(l *lua.State) int {
 	case npm:
 		command = "npm run " + script
 	default:
-		l.PushBoolean(false)
+		l.Push(lua.LBool(false))
 		return 1
 	}
 
@@ -58,11 +58,11 @@ func jsRun(l *lua.State) int {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	cmd.Run()
-	l.PushBoolean(true)
+	l.Push(lua.LBool(true))
 	return 1
 }
 
-func jsInstall(l *lua.State) int {
+func jsInstall(l *lua.LState) int {
 	var command string
 	switch findJsPackageManager() {
 	case yarn:
@@ -74,13 +74,13 @@ func jsInstall(l *lua.State) int {
 	case npm:
 		command = "npm install"
 	default:
-		l.PushBoolean(false)
+		l.Push(lua.LBool(false))
 		return 1
 	}
 	cmd := exec.Command("sh", "-c", command)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	cmd.Run()
-	l.PushBoolean(true)
+	l.Push(lua.LBool(true))
 	return 1
 }

@@ -34,6 +34,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Tidy
         run: go mod tidy
+      - name: Test
+        run: go run test/main.go
       - name: Build
         run: go build -o selene-windows-amd64.exe main/main.go
       - name: Upload artifact
@@ -53,6 +55,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Tidy
         run: go mod tidy
+      - name: Test
+        run: go run test/main.go
       - name: Build
         run: env GOARCH=arm64 go build -o selene-windows-arm64.exe main/main.go
       - name: Upload artifact
@@ -72,6 +76,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Tidy
         run: go mod tidy
+      - name: Test
+        run: go run test/main.go
       - name: Build
         run: go build -o selene-darwin-amd64 main/main.go
       - name: Upload artifact
@@ -97,6 +103,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Tidy
         run: go mod tidy
+      - name: Test
+        run: go run test/main.go
       - name: Build
         run: go build -o selene-linux-amd64 main/main.go
       - name: Upload artifact

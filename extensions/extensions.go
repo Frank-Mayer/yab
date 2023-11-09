@@ -1,13 +1,13 @@
 package extensions
 
-import "github.com/Shopify/go-lua"
+import "github.com/yuin/gopher-lua"
 
 type Function struct {
 	Name        string
 	Description string
 	Parameters  []string
 	Returns     []string
-	Function    lua.Function
+	Function    func(l *lua.LState) int
 }
 
 var Functions = []Function{
@@ -76,15 +76,11 @@ var Functions = []Function{
 	},
 }
 
-func RegisterExtensions(l *lua.State) {
-	l.CreateTable(0, len(Functions))
-
+func RegisterExtensions(l *lua.LState) {
+    table := l.NewTable()
 	for _, f := range Functions {
-		l.PushGoFunction(f.Function)
-		l.SetField(-2, f.Name)
+		l.SetTable(table, lua.LString(f.Name), l.NewFunction(f.Function))
 	}
 
-	l.SetGlobal("Selene")
-
-	addMissingStringFunctions(l)
+	l.SetGlobal("Selene", table)
 }

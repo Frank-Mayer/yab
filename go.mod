@@ -3,14 +3,16 @@ module selene.frankmayer.dev
 go 1.21.3
 
 require (
-	github.com/Shopify/go-lua v0.0.0-20221004153744-91867de107cf // indirect
+	github.com/charmbracelet/glamour v0.6.0
+	github.com/charmbracelet/log v0.2.5
+	github.com/yuin/gopher-lua v1.1.0
+)
+
+require (
 	github.com/alecthomas/chroma v0.10.0 // indirect
-	github.com/aymanbagabas/go-osc52 v1.0.3 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
-	github.com/charmbracelet/glamour v0.6.0 // indirect
 	github.com/charmbracelet/lipgloss v0.8.0 // indirect
-	github.com/charmbracelet/log v0.2.5 // indirect
 	github.com/dlclark/regexp2 v1.4.0 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/gorilla/css v1.0.0 // indirect

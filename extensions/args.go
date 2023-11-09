@@ -1,6 +1,6 @@
 package extensions
 
-import "github.com/Shopify/go-lua"
+import "github.com/yuin/gopher-lua"
 
 var lua_args []string
 
@@ -8,11 +8,11 @@ func SetArgs(args []string) {
 	lua_args = args
 }
 
-func args(l *lua.State) int {
-	l.CreateTable(len(lua_args), 0)
+func args(l *lua.LState) int {
+    table := l.NewTable()
 	for i := 0; i < len(lua_args); i++ {
-		l.PushString(lua_args[i])
-		l.RawSetInt(-2, i+1)
+        l.SetTable(table, lua.LNumber(i+1), lua.LString(lua_args[i]))
 	}
+    l.Push(table)
 	return 1
 }
