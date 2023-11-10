@@ -34,9 +34,9 @@ func main() {
 		os.Remove("./package.json")
 	}
 
-    if has_error {
-        os.Exit(1)
-    }
+	if has_error {
+		os.Exit(1)
+	}
 }
 
 func test(code string, expected_output string) {
