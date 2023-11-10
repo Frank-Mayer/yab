@@ -26,7 +26,9 @@ func Help() {
 
 func Markdown() string {
 	var sb strings.Builder
-	sb.WriteString("# Documentation\n\n")
+	sb.WriteString("# Documentation v")
+	sb.WriteString(util.Version)
+	sb.WriteString("\n\n")
 
 	bin_name := util.BinName()
 

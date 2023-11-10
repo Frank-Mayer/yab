@@ -14,8 +14,6 @@ import (
 	"selene.frankmayer.dev/util"
 )
 
-const version = "0.2.0"
-
 func main() {
 	// process arguments
 	argsWithoutProg := os.Args[1:]
@@ -71,7 +69,7 @@ func treatSpecialArgs(arg0 string) {
 		docs.Help()
 		os.Exit(0)
 	case "--version", "-v":
-		fmt.Println(version)
+		fmt.Println(util.Version)
 		os.Exit(0)
 	case "--init":
 		initProject()
@@ -167,7 +165,10 @@ func initDemoConfig() error {
 		return err
 	}
 	defer f.Close()
-	f.WriteString("print('Hello, world!')")
+	_, err = f.WriteString("print('Hello, world!')")
+	if err != nil {
+		log.Fatal(err)
+	}
 	log.Info("Created", filename)
 	log.Info("Run with `" + util.BinName() + " hello`")
 	return nil
