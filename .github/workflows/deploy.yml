@@ -137,7 +137,7 @@ jobs:
       - name: Generate index.html
         run: |
           cd artifact
-          echo "<h1>Artifacts v$(./selene-linux-amd64 --version)</h1>" >> index.html
+          echo '<h1>Artifacts</h1>' >> index.html
           echo '<ul>' >> index.html
           for n in selene-*; do printf '<li><a href="%s">%s</a></li>\n' "$n" "$n"; done >> index.html
           echo '</ul>' >> index.html
