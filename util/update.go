@@ -1,7 +1,6 @@
 package util
 
 import (
-	"io"
 	"net/http"
 	"os"
 	"os/exec"
@@ -26,12 +25,6 @@ func Update() {
 
 	log.Info("Downloading from " + url)
 
-	out, err := os.Open(current_location)
-	if err != nil {
-		log.Fatal("Could not open current binary", "error", err)
-	}
-	defer out.Close()
-
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Fatal("Could not download new binary", "error", err)
@@ -42,9 +35,9 @@ func Update() {
 		log.Fatal("Could not download new binary", "error", resp.Status)
 	}
 
-	_, err = io.Copy(out, resp.Body)
+	err = install(current_location, resp.Body)
 	if err != nil {
-		log.Fatal("Could not copy new binary", "error", err)
+		log.Fatal("Could not install new binary", "error", err)
 	}
 
 	log.Info("Downloaded new binary")

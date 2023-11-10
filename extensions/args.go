@@ -9,10 +9,10 @@ func SetArgs(args []string) {
 }
 
 func args(l *lua.LState) int {
-    table := l.NewTable()
+	table := l.NewTable()
 	for i := 0; i < len(lua_args); i++ {
-        l.SetTable(table, lua.LNumber(i+1), lua.LString(lua_args[i]))
+		l.SetTable(table, lua.LNumber(i+1), lua.LString(lua_args[i]))
 	}
-    l.Push(table)
+	l.Push(table)
 	return 1
 }

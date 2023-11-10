@@ -7,8 +7,8 @@ import (
 	"path"
 	"strings"
 
-"github.com/yuin/gopher-lua"
 	"github.com/charmbracelet/log"
+	"github.com/yuin/gopher-lua"
 	"selene.frankmayer.dev/docs"
 	"selene.frankmayer.dev/extensions"
 	"selene.frankmayer.dev/util"
@@ -93,7 +93,7 @@ func getInitFile(config_path string, file string) (string, error) {
 func runLuaFile(config_path string, init_file string) error {
 	// setup lua
 	l := lua.NewState()
-    defer l.Close()
+	defer l.Close()
 	extensions.RegisterExtensions(l)
 
 	// set package.path to config folder

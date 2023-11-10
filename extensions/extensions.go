@@ -35,14 +35,14 @@ var Functions = []Function{
 	{
 		"check_exec",
 		"Checks if an executable is available in the system's PATH.",
-        []string{"executable: *string*"},
+		[]string{"executable: *string*"},
 		[]string{"true if the executable is available, false otherwise."},
 		checkExec,
 	},
 	{
 		"stdall",
 		"Call a shell command and return the full output (stdout + stderr) in one string.",
-        []string{"command: *string*"},
+		[]string{"command: *string*"},
 		[]string{"The output of the command."},
 		stdall,
 	},
@@ -77,7 +77,7 @@ var Functions = []Function{
 }
 
 func RegisterExtensions(l *lua.LState) {
-    table := l.NewTable()
+	table := l.NewTable()
 	for _, f := range Functions {
 		l.SetTable(table, lua.LString(f.Name), l.NewFunction(f.Function))
 	}
