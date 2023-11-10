@@ -1,5 +1,7 @@
 # Selene
 
+[![Test](https://github.com/Frank-Mayer/selene/actions/workflows/test.yml/badge.svg)](https://github.com/Frank-Mayer/selene/actions/workflows/test.yml)
+
 Wouldn't it be great if you could use the same build tool for every project?
 Regardless of operating system, programming language...
 
