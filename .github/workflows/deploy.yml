@@ -37,7 +37,7 @@ jobs:
       - name: Test
         run: go run test/main.go
       - name: Build
-        run: go build -o selene-windows-amd64.exe main/main.go
+        run: 'go build -ldflags="-s -w" -o selene-windows-amd64.exe main/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -58,7 +58,7 @@ jobs:
       - name: Test
         run: go run test/main.go
       - name: Build
-        run: env GOARCH=arm64 go build -o selene-windows-arm64.exe main/main.go
+        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o selene-windows-arm64.exe main/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -79,13 +79,13 @@ jobs:
       - name: Test
         run: go run test/main.go
       - name: Build
-        run: go build -o selene-darwin-amd64 main/main.go
+        run: 'go build -ldflags="-s -w" -o selene-darwin-amd64 main/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           path: "./selene-darwin-amd64"
       - name: Build ARM
-        run: env GOARCH=arm64 go build -o selene-darwin-arm64 main/main.go
+        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o selene-darwin-arm64 main/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -106,13 +106,13 @@ jobs:
       - name: Test
         run: go run test/main.go
       - name: Build
-        run: go build -o selene-linux-amd64 main/main.go
+        run: 'go build -ldflags="-s -w" -o selene-linux-amd64 main/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           path: "./selene-linux-amd64"
       - name: Build ARM
-        run: env GOARCH=arm64 go build -o selene-linux-arm64 main/main.go
+        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o selene-linux-arm64 main/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
