@@ -67,6 +67,15 @@ The following folders are searched for configs:
 1. `./.selene/`
 1. `$XDG_CONFIG_HOME/selene/`
 1. `$APPDATA/selene/`
+1. `$HOME/.config/selene/`
+
+## Lua definitions
+
+When you initialize a project with `selene --init` a definitions file is created in one of those directories:
+
+1. `$XDG_CONFIG_HOME/selene/`
+1. `$APPDATA/selene/`
+1. `$HOME/.config/selene/`
 
 ## GitHub Actions
 
