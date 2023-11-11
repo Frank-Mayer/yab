@@ -27,20 +27,56 @@ func GetPackagePath() string {
 }
 
 func GetGlobalConfigPath() (string, error) {
-    pathname := path.Join(os.Getenv("HOME"), ".config", "selene")
-    if _, err := os.Stat(pathname); !os.IsNotExist(err) {
-        return pathname, nil
-    }
+	if xdg_config_home, exists := os.LookupEnv("XDG_CONFIG_HOME"); exists {
+		pathname := path.Join(xdg_config_home, "selene")
+		// check if pathname exists
+		_, err := os.Stat(pathname)
+		if err == nil {
+			return pathname, nil
+		}
+		if os.IsNotExist(err) {
+			// create directory
+			err := os.MkdirAll(pathname, 0755)
+			if err != nil {
+				return "", err
+			}
+			return pathname, nil
+		}
+	}
 
-    pathname = path.Join(os.Getenv("XDG_CONFIG_HOME"), "selene")
-    if _, err := os.Stat(pathname); !os.IsNotExist(err) {
-        return pathname, nil
-    }
+	if home, exists := os.LookupEnv("APPDATA"); exists {
+		pathname := path.Join(home, "selene")
+		// check if pathname exists
+		_, err := os.Stat(pathname)
+		if err == nil {
+			return pathname, nil
+		}
+		if os.IsNotExist(err) {
+			// create directory
+			err := os.MkdirAll(pathname, 0755)
+			if err != nil {
+				return "", err
+			}
+			return pathname, nil
+		}
+	}
 
-    pathname = path.Join(os.Getenv("APPDATA"), "selene")
-    if _, err := os.Stat(pathname); !os.IsNotExist(err) {
-        return pathname, nil
-    }
+	if home, exists := os.LookupEnv("HOME"); exists {
+		pathname := path.Join(home, ".config", "selene")
+		// check if pathname exists
+		_, err := os.Stat(pathname)
+		if err == nil {
+			return pathname, nil
+		}
+		if os.IsNotExist(err) {
+			// create directory
+			err := os.MkdirAll(pathname, 0755)
+			if err != nil {
+				return "", err
+			}
+			return pathname, nil
+		}
+	}
 
-    return "", errors.New("Could not find config path")
+	return "", errors.New("Could not find or create global config path")
 }
