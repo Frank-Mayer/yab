@@ -103,3 +103,13 @@ Updates the Selene binary to the latest version.
 
 **Returns:** true if a javascript package manager was found, false otherwise.
 
+### 𝑓 git_clone_or_pull
+
+*Clones a git repository to a specified destination. If the repository already exists, it will pull the latest changes instead.*
+
+**Parameters:** 
+* url: *string*
+* destination: *string*
+
+**Returns:** true if the repository was cloned or pulled successfully, false otherwise.
+

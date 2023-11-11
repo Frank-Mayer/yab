@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/charmbracelet/log"
-	"github.com/yuin/gopher-lua"
+	lua "github.com/yuin/gopher-lua"
 	"selene.frankmayer.dev/docs"
 	"selene.frankmayer.dev/extensions"
 	"selene.frankmayer.dev/util"
@@ -44,7 +44,8 @@ func main() {
 	extensions.SetArgs(pass_args_list)
 
 	// find config folder
-	config_path, err := get_config_path()
+    var err error
+	util.ConfigPath, err = get_config_path()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -52,11 +53,11 @@ func main() {
 	// run each file passed as an argument
 	for i := 0; i < arg_separator_index; i++ {
 		file := argsWithoutProg[i]
-		init_file, err := getInitFile(config_path, file)
+		init_file, err := getInitFile(util.ConfigPath, file)
 		if err != nil {
 			log.Fatal(err)
 		}
-		err = runLuaFile(config_path, init_file)
+		err = runLuaFile(util.ConfigPath, init_file)
 		if err != nil {
 			log.Fatal("Error running file: "+file, "error", err)
 		}

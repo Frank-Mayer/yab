@@ -74,6 +74,13 @@ var Functions = []Function{
 		[]string{"true if a javascript package manager was found, false otherwise."},
 		jsInstall,
 	},
+	{
+		"git_clone_or_pull",
+		"Clones a git repository to a specified destination. If the repository already exists, it will pull the latest changes instead.",
+		[]string{"url: *string*", "destination: *string*"},
+		[]string{"true if the repository was cloned or pulled successfully, false otherwise."},
+		gitCloneOrPull,
+	},
 }
 
 func RegisterExtensions(l *lua.LState) {
