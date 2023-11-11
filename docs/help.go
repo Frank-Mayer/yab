@@ -62,7 +62,12 @@ func addFunction(f *extensions.Function) string {
 	if len(f.Parameters) > 0 {
 		sb.WriteString("\n")
 		for _, p := range f.Parameters {
-			sb.WriteString("* " + p + "\n")
+			sb.WriteString("* ")
+			param_words := strings.Split(p, " ")
+			sb.WriteString(param_words[0])
+			sb.WriteString(" `")
+			sb.WriteString(strings.Join(param_words[1:], " "))
+			sb.WriteString("`\n")
 		}
 	} else {
 		sb.WriteString("None\n")

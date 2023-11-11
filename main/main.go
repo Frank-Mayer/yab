@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"os"
 	"path"
@@ -44,7 +43,7 @@ func main() {
 	extensions.SetArgs(pass_args_list)
 
 	// find config folder
-    var err error
+	var err error
 	util.ConfigPath, err = get_config_path()
 	if err != nil {
 		log.Fatal(err)
@@ -95,8 +94,7 @@ func runLuaFile(config_path string, init_file string) error {
 	defer l.Close()
 	extensions.RegisterExtensions(l)
 
-	// set package.path to config folder
-	package_path := path.Join(config_path, "?.lua")
+	package_path := util.GetPackagePath()
 	setup_code := "package.path = '" + strings.ReplaceAll(package_path, "\\", "\\\\") + ";'"
 	err := l.DoString(setup_code)
 	if err != nil {
@@ -114,31 +112,19 @@ func runLuaFile(config_path string, init_file string) error {
 }
 
 func get_config_path() (string, error) {
-	init := path.Join(".", ".selene")
+	pathname := path.Join(".", ".selene")
 
 	// check for current directory
-	if _, err := os.Stat(init); !os.IsNotExist(err) {
-		return init, nil
+	if _, err := os.Stat(pathname); !os.IsNotExist(err) {
+		return pathname, nil
 	}
 
-	// check for XDG_CONFIG_HOME
-	if config_home := path.Join(os.Getenv("XDG_CONFIG_HOME"), "selene"); config_home != "" {
-		if _, err := os.Stat(config_home); !os.IsNotExist(err) {
-			return config_home, nil
-		}
-	}
-
-	// check for appdata
-	if appdata := path.Join(os.Getenv("APPDATA"), "selene"); appdata != "" {
-		if _, err := os.Stat(appdata); !os.IsNotExist(err) {
-			return appdata, nil
-		}
-	}
-
-	return "", errors.New("Could not find config file")
+	// check for global config
+	return util.GetGlobalConfigPath()
 }
 
 func initProject() {
+	util.ConfigPath = ".selene"
 	f, err := os.Stat(".selene")
 	if os.IsNotExist(err) {
 		err = os.Mkdir(".selene", 0775)
@@ -157,6 +143,16 @@ func initProject() {
 		log.Fatal(".selene is not a directory")
 	}
 	log.Warn(".selene already exists")
+
+	err = initDefinitons()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = initLuaRC()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func initDemoConfig() error {
@@ -170,7 +166,90 @@ func initDemoConfig() error {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Info("Created", filename)
+	log.Info("Created " + filename)
 	log.Info("Run with `" + util.BinName() + " hello`")
+
+	return nil
+}
+
+func initDefinitons() error {
+	config_path, err := util.GetGlobalConfigPath()
+	if err != nil {
+		return err
+	}
+	filename := path.Join(config_path, "lib", "Selene.lua")
+	// chek if exists
+	_, err = os.Stat(filename)
+	if err == nil {
+		log.Info("Definitions already exist. Updating...")
+		err = os.Remove(filename)
+		if err != nil {
+			return err
+		}
+	} else if !os.IsNotExist(err) {
+		return err
+	}
+
+	// create directory
+	err = os.MkdirAll(path.Join(config_path, "lib"), 0775)
+	if err != nil {
+		return err
+	}
+
+	// create file
+	f, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	// write file
+	_, err = f.WriteString(extensions.Definitions())
+	if err != nil {
+		return err
+	}
+	log.Info("Created " + filename)
+
+	return nil
+}
+
+func initLuaRC() error {
+	filename := ".luarc.json"
+	// chek if exists
+	_, err := os.Stat(filename)
+	if err == nil {
+		log.Info(".luarc.json already exists.")
+		return nil
+	}
+
+	// get global config path
+	global_config, err := util.GetGlobalConfigPath()
+	if err != nil {
+		return err
+	}
+
+	// create file
+	f, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	// collect file contents
+	sb := strings.Builder{}
+	sb.WriteString("{\n")
+	sb.WriteString("  \"$schema\": \"https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json\",")
+	sb.WriteString("  \"runtime.version\": \"Lua 5.1\",\n")
+	sb.WriteString("  \"runtime.path\": [\"" + strings.Join(strings.Split(util.GetPackagePath(), ";"), "\", \"") + "\"],\n")
+	sb.WriteString("  \"workspace.library\": [\"" + path.Join(global_config, "lib") + "\"]\n")
+	sb.WriteString("}\n")
+
+    // write file
+	_, err = f.WriteString(sb.String())
+	if err != nil {
+		return err
+	}
+	log.Info("Created " + filename)
+
 	return nil
 }
