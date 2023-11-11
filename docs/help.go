@@ -85,5 +85,12 @@ func addFunction(f *extensions.Function) string {
 			sb.WriteString("* " + r + "\n")
 		}
 	}
+
+	if f.Example != "" {
+		sb.WriteString("\n**Example:**\n\n```lua\n")
+		sb.WriteString(f.Example)
+		sb.WriteString("\n```\n")
+	}
+
 	return sb.String()
 }

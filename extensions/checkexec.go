@@ -10,9 +10,9 @@ func checkExec(l *lua.LState) int {
 	pkg := l.CheckString(1)
 	_, err := exec.LookPath(pkg)
 	if err != nil {
-		l.Push(lua.LBool(false))
+		l.Push(lua.LFalse)
 	} else {
-		l.Push(lua.LBool(true))
+		l.Push(lua.LTrue)
 	}
 	return 1
 }

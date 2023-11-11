@@ -50,7 +50,7 @@ func jsRun(l *lua.LState) int {
 	case npm:
 		command = "npm run " + script
 	default:
-		l.Push(lua.LBool(false))
+		l.Push(lua.LFalse)
 		return 1
 	}
 
@@ -58,7 +58,7 @@ func jsRun(l *lua.LState) int {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	cmd.Run()
-	l.Push(lua.LBool(true))
+	l.Push(lua.LTrue)
 	return 1
 }
 
@@ -74,13 +74,13 @@ func jsInstall(l *lua.LState) int {
 	case npm:
 		command = "npm install"
 	default:
-		l.Push(lua.LBool(false))
+		l.Push(lua.LFalse)
 		return 1
 	}
 	cmd := exec.Command("sh", "-c", command)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	cmd.Run()
-	l.Push(lua.LBool(true))
+	l.Push(lua.LTrue)
 	return 1
 }

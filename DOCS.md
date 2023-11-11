@@ -1,4 +1,4 @@
-# Documentation v0.3.1
+# Documentation v0.4.0
 
 ## Usage:
 
@@ -112,4 +112,23 @@ Updates the Selene binary to the latest version.
 * destination `string`
 
 **Returns:** true if the repository was cloned or pulled successfully, false otherwise.
+
+### 𝑓 zip
+
+*Create a zip file containing the given files.*
+
+**Parameters:** 
+* files `table`
+* output `string`
+
+**Returns:** true if the zip file was created successfully, false otherwise.
+
+**Example:**
+
+```lua
+Selene.zip(
+	{'foo.txt', 'bar.txt', 'baz/'},
+	'archive.zip'
+)
+```
 

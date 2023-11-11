@@ -36,7 +36,6 @@ func gitCloneOrPull(l *lua.LState) int {
 	}
 
 	// repo exists, pull latest changes
-	log.Info("Pulling", "repo", url, "dest", dest)
 	wt, err := repo.Worktree()
 	if err != nil {
 		log.Error("Error pulling repo", "error", err)
