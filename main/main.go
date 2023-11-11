@@ -56,7 +56,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		err = runLuaFile(util.ConfigPath, init_file)
+		err = runLuaFile(init_file)
 		if err != nil {
 			log.Fatal("Error running file: "+file, "error", err)
 		}
@@ -88,7 +88,7 @@ func getInitFile(config_path string, file string) (string, error) {
 	return init_file, nil
 }
 
-func runLuaFile(config_path string, init_file string) error {
+func runLuaFile(init_file string) error {
 	// setup lua
 	l := lua.NewState()
 	defer l.Close()
@@ -142,16 +142,11 @@ func initProject() {
 	} else if !f.IsDir() {
 		log.Fatal(".selene is not a directory")
 	}
-	log.Warn(".selene already exists")
+	log.Info(".selene already exists")
 
 	err = initDefinitons()
 	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = initLuaRC()
-	if err != nil {
-		log.Fatal(err)
+		log.Error(err)
 	}
 }
 
@@ -177,7 +172,10 @@ func initDefinitons() error {
 	if err != nil {
 		return err
 	}
-	filename := path.Join(config_path, "lib", "Selene.lua")
+
+	lib_path := path.Join(config_path, "lib")
+	filename := path.Join(lib_path, "Selene.lua")
+
 	// chek if exists
 	_, err = os.Stat(filename)
 	if err == nil {
@@ -191,7 +189,7 @@ func initDefinitons() error {
 	}
 
 	// create directory
-	err = os.MkdirAll(path.Join(config_path, "lib"), 0775)
+	err = os.MkdirAll(lib_path, 0775)
 	if err != nil {
 		return err
 	}
@@ -208,48 +206,7 @@ func initDefinitons() error {
 	if err != nil {
 		return err
 	}
-	log.Info("Created " + filename)
-
-	return nil
-}
-
-func initLuaRC() error {
-	filename := ".luarc.json"
-	// chek if exists
-	_, err := os.Stat(filename)
-	if err == nil {
-		log.Info(".luarc.json already exists.")
-		return nil
-	}
-
-	// get global config path
-	global_config, err := util.GetGlobalConfigPath()
-	if err != nil {
-		return err
-	}
-
-	// create file
-	f, err := os.Create(filename)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	// collect file contents
-	sb := strings.Builder{}
-	sb.WriteString("{\n")
-	sb.WriteString("  \"$schema\": \"https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json\",")
-	sb.WriteString("  \"runtime.version\": \"Lua 5.1\",\n")
-	sb.WriteString("  \"runtime.path\": [\"" + strings.Join(strings.Split(util.GetPackagePath(), ";"), "\", \"") + "\"],\n")
-	sb.WriteString("  \"workspace.library\": [\"" + path.Join(global_config, "lib") + "\"]\n")
-	sb.WriteString("}\n")
-
-    // write file
-	_, err = f.WriteString(sb.String())
-	if err != nil {
-		return err
-	}
-	log.Info("Created " + filename)
+	log.Info("Lua API definitions created", "location", lib_path)
 
 	return nil
 }
