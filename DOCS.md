@@ -1,10 +1,22 @@
-# Documentation v0.4.0
+# Documentation v0.5.0
 
-## Usage:
+## Usage
 
 selene [configs ...]
 
 selene [configs ...] -- [args ...]
+
+Configs are Lua files in your local `.selene` folder or in the global config folder.
+
+### Flags
+
+**--debug**
+
+Enables debug logging.
+
+**--silent**
+
+Disables logging.
 
 ## Command Line Arguments
 
@@ -130,5 +142,37 @@ Selene.zip(
 	{'foo.txt', 'bar.txt', 'baz/'},
 	'archive.zip'
 )
+```
+
+### 𝑓 watch
+
+*Watch file or directory paths for changes and call a function when a change occurs. The callback function will be called with the file path and the event type as arguments. The event type can be one of 'create', 'write', 'remove', 'rename' or 'chmod'.*
+
+**Parameters:** 
+* paths `table`
+* callback `function(string, string)`
+
+**Returns:** None
+
+**Example:**
+
+```lua
+Selene.watch('foo.txt', function(file, event)
+	print('foo.txt changed!')
+end)
+```
+
+### 𝑓 block
+
+*Block the current thread and wait for an interrupt signal.*
+
+**Parameters:** None
+
+**Returns:** None
+
+**Example:**
+
+```lua
+Selene.block()
 ```
 

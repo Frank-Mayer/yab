@@ -32,9 +32,16 @@ func Markdown() string {
 
 	bin_name := util.BinName()
 
-	sb.WriteString("## Usage:\n\n")
+	sb.WriteString("## Usage\n\n")
 	sb.WriteString(bin_name + " [configs ...]\n\n")
 	sb.WriteString(bin_name + " [configs ...] -- [args ...]\n\n")
+	sb.WriteString("Configs are Lua files in your local `.selene` folder or in the global config folder.\n\n")
+
+	sb.WriteString("### Flags\n\n")
+	sb.WriteString("**--debug**\n\n")
+	sb.WriteString("Enables debug logging.\n\n")
+	sb.WriteString("**--silent**\n\n")
+	sb.WriteString("Disables logging.\n\n")
 
 	sb.WriteString("## Command Line Arguments\n\n")
 	sb.WriteString("**" + bin_name + " [--version, -v]**\n\n")

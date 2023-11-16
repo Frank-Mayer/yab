@@ -13,7 +13,7 @@ type Function struct {
 	Returns     []string
 	Function    func(l *lua.LState) int
 	Ret         string
-    Example     string
+	Example     string
 }
 
 var Functions = []Function{
@@ -24,7 +24,7 @@ var Functions = []Function{
 		[]string{"\"windows\", \"linux\" or \"darwin\" on the respective system."},
 		osType,
 		"'windows'|'linux'|'darwin'",
-        "",
+		"",
 	},
 	{
 		"os_arch",
@@ -33,7 +33,7 @@ var Functions = []Function{
 		[]string{"\"amd64\" or \"arm64\" on the respective system."},
 		osArch,
 		"'amd64'|'arm64'",
-        "",
+		"",
 	},
 	{
 		"args",
@@ -42,7 +42,7 @@ var Functions = []Function{
 		[]string{"A table containing the command line arguments."},
 		args,
 		"table",
-        "",
+		"",
 	},
 	{
 		"check_exec",
@@ -51,7 +51,7 @@ var Functions = []Function{
 		[]string{"true if the executable is available, false otherwise."},
 		checkExec,
 		"boolean",
-        "",
+		"",
 	},
 	{
 		"stdall",
@@ -60,7 +60,7 @@ var Functions = []Function{
 		[]string{"The output of the command."},
 		stdall,
 		"string",
-        "",
+		"",
 	},
 	{
 		"stdout",
@@ -69,7 +69,7 @@ var Functions = []Function{
 		[]string{"The output of the command."},
 		stdout,
 		"string",
-        "",
+		"",
 	},
 	{
 		"stderr",
@@ -78,7 +78,7 @@ var Functions = []Function{
 		[]string{"The output of the command."},
 		stderr,
 		"string",
-        "",
+		"",
 	},
 	{
 		"js_run",
@@ -87,7 +87,7 @@ var Functions = []Function{
 		[]string{"true if a javascript package manager was found, false otherwise."},
 		jsRun,
 		"boolean",
-        "",
+		"",
 	},
 	{
 		"js_install",
@@ -96,7 +96,7 @@ var Functions = []Function{
 		[]string{"true if a javascript package manager was found, false otherwise."},
 		jsInstall,
 		"boolean",
-        "",
+		"",
 	},
 	{
 		"git_clone_or_pull",
@@ -105,17 +105,37 @@ var Functions = []Function{
 		[]string{"true if the repository was cloned or pulled successfully, false otherwise."},
 		gitCloneOrPull,
 		"boolean",
-        "",
+		"",
 	},
-    {
-        "zip",
-        "Create a zip file containing the given files.",
-        []string{"files table", "output string"},
-        []string{"true if the zip file was created successfully, false otherwise."},
-        makeZip,
-        "boolean",
-        "Selene.zip(\n\t{'foo.txt', 'bar.txt', 'baz/'},\n\t'archive.zip'\n)",
-    },
+	{
+		"zip",
+		"Create a zip file containing the given files.",
+		[]string{"files table", "output string"},
+		[]string{"true if the zip file was created successfully, false otherwise."},
+		makeZip,
+		"boolean",
+		"Selene.zip(\n\t{'foo.txt', 'bar.txt', 'baz/'},\n\t'archive.zip'\n)",
+	},
+	{
+		"watch",
+		"Watch file or directory paths for changes and call a function when a change occurs. " +
+			"The callback function will be called with the file path and the event type as arguments. " +
+			"The event type can be one of 'create', 'write', 'remove', 'rename' or 'chmod'.",
+		[]string{"paths table", "callback function(string, string)"},
+		[]string{},
+		watch,
+		"",
+		"Selene.watch('foo.txt', function(file, event)\n\tprint('foo.txt changed!')\nend)",
+	},
+	{
+		"block",
+		"Block the current thread and wait for an interrupt signal.",
+		[]string{},
+		[]string{},
+		block,
+		"",
+		"Selene.block()",
+	},
 }
 
 func Definitions() string {

@@ -14,6 +14,8 @@ import (
 )
 
 func main() {
+	log.SetLevel(log.WarnLevel)
+
 	// process arguments
 	argsWithoutProg := os.Args[1:]
 
@@ -35,9 +37,17 @@ func main() {
 		arg := argsWithoutProg[i]
 		if pass_args {
 			pass_args_list = append(pass_args_list, arg)
-		} else if arg == "--" {
-			pass_args = true
-			arg_separator_index = i
+		} else {
+			switch arg {
+			case "--debug":
+				log.SetLevel(log.DebugLevel)
+                log.Debug("Debug mode enabled")
+            case "--silent":
+                log.SetLevel(10)
+			case "--":
+				pass_args = true
+				arg_separator_index = i
+			}
 		}
 	}
 	extensions.SetArgs(pass_args_list)
@@ -52,6 +62,9 @@ func main() {
 	// run each file passed as an argument
 	for i := 0; i < arg_separator_index; i++ {
 		file := argsWithoutProg[i]
+        if strings.HasPrefix(file, "-") {
+            continue
+        }
 		init_file, err := getInitFile(util.ConfigPath, file)
 		if err != nil {
 			log.Fatal(err)

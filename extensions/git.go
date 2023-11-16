@@ -22,7 +22,7 @@ func gitCloneOrPull(l *lua.LState) int {
 	repo, err = git.PlainOpen(dest)
 	if err != nil {
 		// repo does not exist, clone it
-		log.Info("Cloning", "repo", url, "dest", dest)
+		log.Debug("Cloning", "repo", url, "dest", dest)
 		repo, err = git.PlainClone(dest, false, &git.CloneOptions{
 			URL: url,
 		})
@@ -45,7 +45,7 @@ func gitCloneOrPull(l *lua.LState) int {
 	err = wt.Pull(&git.PullOptions{})
 	if err != nil {
 		if err == git.NoErrAlreadyUpToDate {
-			log.Info("Repo already up to date", "repo", url, "dest", dest)
+			log.Debug("Repo already up to date", "repo", url, "dest", dest)
 			l.Push(lua.LTrue)
 			return 1
 		}

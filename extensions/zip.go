@@ -29,7 +29,6 @@ func makeZip(l *lua.LState) int {
 		l.Push(lua.LFalse)
 		return 1
 	}
-    defer log.Info("Zip file created", "path", output)
 	defer archive.Close()
 
 	writer := zip.NewWriter(archive)
