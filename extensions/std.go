@@ -14,8 +14,6 @@ import (
 func stdall(l *lua.LState) int {
 	command := l.CheckString(1)
 
-	log.Info("stdall", "command", command)
-
 	cmd := util.System(command)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
@@ -68,8 +66,6 @@ func stdall(l *lua.LState) int {
 func stdout(l *lua.LState) int {
 	command := l.CheckString(1)
 
-	log.Info("stdall", "command", command)
-
 	cmd := util.System(command)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
@@ -108,8 +104,6 @@ func stdout(l *lua.LState) int {
 // call a shell command and return the error (stderr) in one string
 func stderr(l *lua.LState) int {
 	command := l.CheckString(1)
-
-	log.Info("stdall", "command", command)
 
 	cmd := util.System(command)
 
