@@ -1,86 +1,147 @@
 package extensions
 
 import (
-	"os/exec"
+	"bufio"
 	"strings"
+	"sync"
 
-	"github.com/yuin/gopher-lua"
+	"github.com/charmbracelet/log"
+	lua "github.com/yuin/gopher-lua"
+	"selene.frankmayer.dev/util"
 )
 
 // call a shell command and return the full output (stdout + stderr) in one string
 func stdall(l *lua.LState) int {
 	command := l.CheckString(1)
-	parts := strings.Fields(command)
 
-	// Check if there are any parts
-	if len(parts) == 0 {
-		l.Push(lua.LString(""))
-		return 1
-	}
+	log.Info("stdall", "command", command)
 
-	// Assign the first part to the 'name' variable
-	name := parts[0]
-
-	// Assign the rest of the parts to the 'arg' slice
-	args := parts[1:]
-
-	out, err := exec.Command(name, args...).CombinedOutput()
+	cmd := util.System(command)
+	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		l.Push(lua.LString(err.Error()))
-		return 1
+		log.Fatal("Error creating stdout pipe", "error", err)
+		return 0
 	}
-	l.Push(lua.LString(string(out)))
+
+	stderr, err := cmd.StderrPipe()
+	if err != nil {
+		log.Fatal("Error creating stderr pipe", "error", err)
+		return 0
+	}
+
+	if err := cmd.Start(); err != nil {
+		log.Fatal("Error starting command", "error", err)
+		return 0
+	}
+
+	sb := strings.Builder{}
+	var wg sync.WaitGroup
+
+	wg.Add(2)
+
+	go func() {
+		defer wg.Done()
+		scanner := bufio.NewScanner(stdout)
+		for scanner.Scan() {
+			sb.WriteString(scanner.Text() + "\n")
+		}
+	}()
+
+	go func() {
+		defer wg.Done()
+		scanner := bufio.NewScanner(stderr)
+		for scanner.Scan() {
+			sb.WriteString(scanner.Text() + "\n")
+		}
+	}()
+	wg.Wait()
+
+	if err := cmd.Wait(); err != nil {
+		log.Error("Error executing command", "command", command, "error", err)
+	}
+
+	l.Push(lua.LString(sb.String()))
 	return 1
 }
 
 // call a shell command and return the output (stdout) in one string
 func stdout(l *lua.LState) int {
 	command := l.CheckString(1)
-	parts := strings.Fields(command)
 
-	// Check if there are any parts
-	if len(parts) == 0 {
-		l.Push(lua.LString(""))
-		return 1
-	}
+	log.Info("stdall", "command", command)
 
-	// Assign the first part to the 'name' variable
-	name := parts[0]
-
-	// Assign the rest of the parts to the 'arg' slice
-	args := parts[1:]
-
-	out, err := exec.Command(name, args...).Output()
+	cmd := util.System(command)
+	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		l.Push(lua.LString(err.Error()))
-		return 1
+		log.Fatal("Error creating stdout pipe", "error", err)
+		return 0
 	}
-	l.Push(lua.LString(string(out)))
+
+	if err := cmd.Start(); err != nil {
+		log.Fatal("Error starting command", "error", err)
+		return 0
+	}
+
+	sb := strings.Builder{}
+	var wg sync.WaitGroup
+
+	wg.Add(1)
+
+	go func() {
+		defer wg.Done()
+		scanner := bufio.NewScanner(stdout)
+		for scanner.Scan() {
+			sb.WriteString(scanner.Text() + "\n")
+		}
+	}()
+
+	wg.Wait()
+
+	if err := cmd.Wait(); err != nil {
+		log.Error("Error executing command", "command", command, "error", err)
+	}
+
+	l.Push(lua.LString(sb.String()))
 	return 1
 }
 
 // call a shell command and return the error (stderr) in one string
 func stderr(l *lua.LState) int {
 	command := l.CheckString(1)
-	parts := strings.Fields(command)
 
-	// Check if there are any parts
-	if len(parts) == 0 {
-		l.Push(lua.LString(""))
-		return 1
-	}
+	log.Info("stdall", "command", command)
 
-	// Assign the first part to the 'name' variable
-	name := parts[0]
+	cmd := util.System(command)
 
-	// Assign the rest of the parts to the 'arg' slice
-	args := parts[1:]
-
-	out, err := exec.Command(name, args...).CombinedOutput()
+	stderr, err := cmd.StderrPipe()
 	if err != nil {
-		l.Push(lua.LString(err.Error()))
-		return 1
+		log.Fatal("Error creating stderr pipe", "error", err)
+		return 0
 	}
-	l.Push(lua.LString(string(out)))
+
+	if err := cmd.Start(); err != nil {
+		log.Fatal("Error starting command", "error", err)
+		return 0
+	}
+
+	sb := strings.Builder{}
+	var wg sync.WaitGroup
+
+	wg.Add(1)
+
+	go func() {
+		defer wg.Done()
+		scanner := bufio.NewScanner(stderr)
+		for scanner.Scan() {
+			sb.WriteString(scanner.Text() + "\n")
+		}
+	}()
+	wg.Wait()
+
+	if err := cmd.Wait(); err != nil {
+		log.Error("Error executing command", "command", command, "error", err)
+	}
+
+	l.Push(lua.LString(sb.String()))
 	return 1
 }
