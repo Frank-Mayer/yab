@@ -12,7 +12,7 @@ Use Lua scripts to define specific actions and execute them from the command lin
 **Does that not already exist?**
 
 The build tools Bazel and Gradle served as an example.
-However, Gradle is only used in the Java ecosystem and Bazel is very complicated.
+However, Gradle is mainly used in the Java ecosystem and Bazel is very complicated.
 Both use a domain-specific language, which complicates familiarization and makes it difficult to find help.
 
 Lua is a common and performant language that is used, for example, to configure [Neovim](https://github.com/neovim) or build World of Warcraft Mods.
