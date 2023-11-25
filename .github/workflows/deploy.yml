@@ -139,7 +139,12 @@ jobs:
           cd artifact
           echo '<h1>Artifacts</h1>' >> index.html
           echo '<ul>' >> index.html
-          for n in selene-*; do printf '<li><a href="%s">%s</a></li>\n' "$n" "$n"; done >> index.html
+          echo '<li><a download="selene" href="selene-darwin-amd64">selene-darwin-amd64</a></li>' >> index.html
+          echo '<li><a download="selene" href="selene-darwin-arm64">selene-darwin-arm64</a></li>' >> index.html
+          echo '<li><a download="selene" href="selene-linux-amd64">selene-linux-amd64</a></li>' >> index.html
+          echo '<li><a download="selene" href="selene-linux-arm64">selene-linux-arm64</a></li>' >> index.html
+          echo '<li><a download="selene.exe" href="selene-windows-amd64.exe">selene-windows-amd64.exe</a></li>' >> index.html
+          echo '<li><a download="selene.exe" href="selene-windows-arm64.exe">selene-windows-arm64.exe</a></li>' >> index.html
           echo '</ul>' >> index.html
           cd ..
       - name: Upload pages artifact
