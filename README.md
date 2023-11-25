@@ -2,6 +2,8 @@
 
 [![Deploy to Pages](https://github.com/Frank-Mayer/selene/actions/workflows/deploy.yml/badge.svg)](https://github.com/Frank-Mayer/selene/actions/workflows/deploy.yml)
 
+[Download](https://frank-mayer.github.io/selene/)
+
 Wouldn't it be great if you could use the same build tool for every project?
 Regardless of operating system, programming language...
 
@@ -37,8 +39,6 @@ Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/selene/blob/mai
 
 Place the downloaded binary wherever you want.
 To be able to use the self-update functionality ensure that access rights aren’t a problem.
-
-Rename the binary to `selene.exe`/`selene` depending on your OS (if you don’t want to alwys type your OS name and architecture).
 
 Ensure that the location of the binary is available in the `PATH` environment variable to make it globally available.
 
@@ -83,12 +83,6 @@ When you initialize a project with `selene --init` a definitions file is created
 - name: Setup Selene
   uses: Frank-Mayer/selene-setup@v1.0.0
 ```
-
-## Download
-
-- Darwin&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-darwin-amd64)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-darwin-arm64)
-- Debian&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-linux-amd64)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-linux-arm64)
-- Windows&nbsp;&nbsp; [amd64](https://frank-mayer.github.io/selene/selene-windows-amd64.exe)&nbsp;&nbsp;&nbsp;[arm64](https://frank-mayer.github.io/selene/selene-windows-arm64.exe)
 
 ## Etymology
 
