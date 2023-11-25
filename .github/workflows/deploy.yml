@@ -137,6 +137,11 @@ jobs:
       - name: Generate index.html
         run: |
           cd artifact
+          echo '<!DOCTYPE html>' >> index.html
+          echo '<html lang="en-US"><head>' >> index.html
+          echo '<title>Selene Artifacts</title>' >> index.html
+          echo '<style>:root{color-scheme: light dark; font-family: sans-serif;}</style>' >> index.html
+          echo '</head><body>' >> index.html
           echo '<h1>Artifacts</h1>' >> index.html
           echo '<ul>' >> index.html
           echo '<li><a download="selene" href="selene-darwin-amd64">selene-darwin-amd64</a></li>' >> index.html
@@ -146,6 +151,7 @@ jobs:
           echo '<li><a download="selene.exe" href="selene-windows-amd64.exe">selene-windows-amd64.exe</a></li>' >> index.html
           echo '<li><a download="selene.exe" href="selene-windows-arm64.exe">selene-windows-arm64.exe</a></li>' >> index.html
           echo '</ul>' >> index.html
+          echo '</body></html>' >> index.html
           cd ..
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v2
