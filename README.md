@@ -2,8 +2,6 @@
 
 [![Deploy to Pages](https://github.com/Frank-Mayer/selene/actions/workflows/deploy.yml/badge.svg)](https://github.com/Frank-Mayer/selene/actions/workflows/deploy.yml)
 
-[Download](https://frank-mayer.github.io/selene/)
-
 Wouldn't it be great if you could use the same build tool for every project?
 Regardless of operating system, programming language...
 
@@ -21,6 +19,18 @@ Lua is a common and performant language that is used, for example, to configure 
 
 Looking for an example configuration? Take a look at [this projects `.selene` folder](https://github.com/Frank-Mayer/selene/tree/main/.selene).
 
+## Installation
+
+### Download prebuild
+
+https://frank-mayer.github.io/selene/
+
+### Install using Go
+
+```bash
+go install github.com/Frank-Mayer/selene/cmd/selene@latest
+```
+
 ## Docs
 
 Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/selene/blob/main/DOCS.md) file.
@@ -32,21 +42,6 @@ Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/selene/blob/mai
 ```markdown
 [![Selene Project](https://img.shields.io/badge/Selene_Project-2C2D72?logo=lua)](https://github.com/Frank-Mayer/selene)
 ```
-
-## Quickstart
-
-[Download](https://frank-mayer.github.io/selene/) the latest binary for your os and architecture.
-
-Place the downloaded binary wherever you want.
-To be able to use the self-update functionality ensure that access rights aren’t a problem.
-
-Ensure that the location of the binary is available in the `PATH` environment variable to make it globally available.
-
-Remember to restart your shell session after changing any environment variables.
-
-Try `selene --version` to check if the istallation was successful.
-
-Use `selene --help` to see the documentation of your installed version.
 
 ## Usage
 
