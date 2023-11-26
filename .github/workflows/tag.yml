@@ -47,6 +47,7 @@ jobs:
                 echo "No version change detected. Exiting."
                 exit 1
               fi
-              git tag -a $latest -m "Release $latest"
-              git push origin $latest
+              echo "Version change detected. Tagging. $latest -> $current"
+              git tag -a $current -m "Release $current"
+              git push origin $current
     
