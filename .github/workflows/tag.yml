@@ -50,4 +50,15 @@ jobs:
               echo "Version change detected. Tagging. $latest -> $current"
               git tag -a $current -m "Release $current"
               git push origin $current
+              body=$(cat DOCS.md)
+              curl -X POST "https://api.github.com/repos/Frank-Mayer/selene/releases" \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              -d '{
+                  "tag_name": "'"$current"'",
+                  "name": "'"$current"'",
+                  "body": "'"$body"'",
+                  "draft": false,
+                  "prerelease": false
+              }'
     
