@@ -51,7 +51,7 @@ jobs:
               git tag -a $current -m "Release $current"
               git push origin $current
               body="$(cat DOCS.md)"
-              body=$(echo "$body" | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/\\n/g' -e 's/"/\\"/g')
+              body=$(echo "$body" | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/\\n/g' -e 's/"/\\"/g' -e 's/\t/\\t/g')
               curl -L \
               -X POST \
               -H "Accept: application/vnd.github+json" \
