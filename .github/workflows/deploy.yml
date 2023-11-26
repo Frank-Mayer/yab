@@ -104,7 +104,7 @@ jobs:
       - name: Tidy
         run: go mod tidy
       - name: Test
-        run: go run test/test/main.go
+        run: go run cmd/test/main.go
       - name: Build
         run: 'go build -ldflags="-s -w" -o selene-linux-amd64 cmd/selene/selene.go'
       - name: Upload artifact
