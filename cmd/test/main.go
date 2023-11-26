@@ -1,16 +1,17 @@
 package main
 
 import (
+	"github.com/Frank-Mayer/selene/internal/extensions"
+
 	"os"
 	"runtime"
 
 	"github.com/charmbracelet/log"
 	"github.com/yuin/gopher-lua"
-	"selene.frankmayer.dev/extensions"
 )
 
 var (
-	has_error = false
+	hasError = false
 )
 
 func main() {
@@ -31,15 +32,18 @@ func main() {
 		log.Error("Writing package.json", "err", err)
 	} else {
 		test("return Selene.js_run(\"test\")", "true")
-		os.Remove("./package.json")
+		err := os.Remove("./package.json")
+		if err != nil {
+			log.Fatal("Error removing package.json", "err", err)
+		}
 	}
 
-	if has_error {
+	if hasError {
 		os.Exit(1)
 	}
 }
 
-func test(code string, expected_output string) {
+func test(code string, expectedOutput string) {
 	l := lua.NewState()
 	defer l.Close()
 
@@ -51,7 +55,7 @@ func test(code string, expected_output string) {
 			"Running test",
 			"code", code,
 			"err", err)
-		has_error = true
+		hasError = true
 		return
 	}
 
@@ -61,21 +65,21 @@ func test(code string, expected_output string) {
 			"Running test",
 			"code", code,
 			"err", "no value on stack")
-		has_error = true
+		hasError = true
 		return
 	}
 	ret := l.Get(-1) // returned value
 	l.Pop(1)         // remove received value
 
-	received_output := ret.String()
+	receivedOutput := ret.String()
 
-	if received_output != expected_output {
+	if receivedOutput != expectedOutput {
 		log.Error(
 			"Test failed",
 			"code", code,
-			"expected_output", expected_output,
-			"received_output", received_output)
-		has_error = true
+			"expected_output", expectedOutput,
+			"received_output", receivedOutput)
+		hasError = true
 		return
 	}
 
@@ -84,12 +88,12 @@ func test(code string, expected_output string) {
 		log.Error(
 			"Running test",
 			"code", code,
-			"expected_output", expected_output,
-			"received_output", received_output,
+			"expected_output", expectedOutput,
+			"received_output", receivedOutput,
 			"err", "stack not empty")
-		has_error = true
+		hasError = true
 		return
 	}
 
-	log.Info("Test passed: " + code + " -> " + expected_output)
+	log.Info("Test passed: " + code + " -> " + expectedOutput)
 }

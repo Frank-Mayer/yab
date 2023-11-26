@@ -5,7 +5,7 @@ import (
 	"os/signal"
 
 	"github.com/charmbracelet/log"
-	lua "github.com/yuin/gopher-lua"
+	"github.com/yuin/gopher-lua"
 )
 
 func block(_ *lua.LState) int {

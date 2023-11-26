@@ -6,9 +6,9 @@ import (
 )
 
 func TermWidth() int {
-	term_width := os.Getenv("COLUMNS")
+	termWidth := os.Getenv("COLUMNS")
 
-	width, err := strconv.Atoi(term_width)
+	width, err := strconv.Atoi(termWidth)
 	if err != nil {
 		return 80
 	}

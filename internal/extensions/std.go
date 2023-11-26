@@ -5,9 +5,9 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/Frank-Mayer/selene/internal/util"
 	"github.com/charmbracelet/log"
-	lua "github.com/yuin/gopher-lua"
-	"selene.frankmayer.dev/util"
+	"github.com/yuin/gopher-lua"
 )
 
 // call a shell command and return the full output (stdout + stderr) in one string

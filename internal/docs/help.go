@@ -1,12 +1,13 @@
 package docs
 
 import (
+	"github.com/Frank-Mayer/selene/internal/extensions"
+	"github.com/Frank-Mayer/selene/internal/util"
+
 	"fmt"
 	"strings"
 
 	"github.com/charmbracelet/glamour"
-	"selene.frankmayer.dev/extensions"
-	"selene.frankmayer.dev/util"
 )
 
 func Help() {
@@ -30,11 +31,11 @@ func Markdown() string {
 	sb.WriteString(util.Version)
 	sb.WriteString("\n\n")
 
-	bin_name := util.BinName()
+	binName := util.BinName()
 
 	sb.WriteString("## Usage\n\n")
-	sb.WriteString(bin_name + " [configs ...]\n\n")
-	sb.WriteString(bin_name + " [configs ...] -- [args ...]\n\n")
+	sb.WriteString(binName + " [configs ...]\n\n")
+	sb.WriteString(binName + " [configs ...] -- [args ...]\n\n")
 	sb.WriteString("Configs are Lua files in your local `.selene` folder or in the global config folder.\n\n")
 
 	sb.WriteString("### Flags\n\n")
@@ -44,13 +45,13 @@ func Markdown() string {
 	sb.WriteString("Disables logging.\n\n")
 
 	sb.WriteString("## Command Line Arguments\n\n")
-	sb.WriteString("**" + bin_name + " [--version, -v]**\n\n")
+	sb.WriteString("**" + binName + " [--version, -v]**\n\n")
 	sb.WriteString("Prints the version of the program.\n\n")
-	sb.WriteString("**" + bin_name + " [--help, -h]**\n\n")
+	sb.WriteString("**" + binName + " [--help, -h]**\n\n")
 	sb.WriteString("Prints this help.\n\n")
-	sb.WriteString("**" + bin_name + " --init**\n\n")
+	sb.WriteString("**" + binName + " --init**\n\n")
 	sb.WriteString("Initializes a new Selene project.\n\n")
-	sb.WriteString("**" + bin_name + " [--update, --upgrade, -u]**\n\n")
+	sb.WriteString("**" + binName + " [--update, --upgrade, -u]**\n\n")
 	sb.WriteString("Updates the Selene binary to the latest version.\n\n")
 
 	sb.WriteString("## Lua API Functions (in the `Selene` global table)\n\n")
@@ -70,10 +71,10 @@ func addFunction(f *extensions.Function) string {
 		sb.WriteString("\n")
 		for _, p := range f.Parameters {
 			sb.WriteString("* ")
-			param_words := strings.Split(p, " ")
-			sb.WriteString(param_words[0])
+			paramWords := strings.Split(p, " ")
+			sb.WriteString(paramWords[0])
 			sb.WriteString(" `")
-			sb.WriteString(strings.Join(param_words[1:], " "))
+			sb.WriteString(strings.Join(paramWords[1:], " "))
 			sb.WriteString("`\n")
 		}
 	} else {

@@ -3,11 +3,11 @@ package main
 import (
 	"os"
 
-	"selene.frankmayer.dev/docs"
+	"github.com/Frank-Mayer/selene/internal/docs"
 )
 
 func main() {
-	docs_str := docs.Markdown()
+	docsStr := docs.Markdown()
 
 	filename := "DOCS.md"
 
@@ -20,7 +20,7 @@ func main() {
 		}
 		defer file.Close()
 
-		_, err = file.WriteString(docs_str)
+		_, err = file.WriteString(docsStr)
 		if err != nil {
 			panic(err)
 		}
@@ -32,7 +32,7 @@ func main() {
 		}
 		defer file.Close()
 
-		_, err = file.WriteString(docs_str)
+		_, err = file.WriteString(docsStr)
 		if err != nil {
 			panic(err)
 		}

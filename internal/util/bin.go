@@ -11,11 +11,11 @@ var (
 )
 
 func BinName() string {
-	bin_name := os.Args[0]
-	if len(bin_name) > 24 {
+	binName := os.Args[0]
+	if len(binName) > 24 {
 		return "selene"
 	}
-	return bin_name
+	return binName
 }
 
 func GetPackagePath() string {
@@ -27,8 +27,8 @@ func GetPackagePath() string {
 }
 
 func GetGlobalConfigPath() (string, error) {
-	if xdg_config_home, exists := os.LookupEnv("XDG_CONFIG_HOME"); exists {
-		pathname := path.Join(xdg_config_home, "selene")
+	if xdgConfigHome, exists := os.LookupEnv("XDG_CONFIG_HOME"); exists {
+		pathname := path.Join(xdgConfigHome, "selene")
 		// check if pathname exists
 		_, err := os.Stat(pathname)
 		if err == nil {
@@ -78,5 +78,5 @@ func GetGlobalConfigPath() (string, error) {
 		}
 	}
 
-	return "", errors.New("Could not find or create global config path")
+	return "", errors.New("could not find or create global config path")
 }

@@ -1,4 +1,4 @@
-module selene.frankmayer.dev
+module github.com/Frank-Mayer/selene
 
 go 1.21.3
 

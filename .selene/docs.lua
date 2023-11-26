@@ -1,1 +1,1 @@
-os.execute("go run docs_gen/main.go")
+os.execute("go run cmd/docs/main.go")

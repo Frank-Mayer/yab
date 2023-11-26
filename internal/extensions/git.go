@@ -1,12 +1,14 @@
 package extensions
 
 import (
+	"github.com/Frank-Mayer/selene/internal/util"
+
+	"errors"
 	"path"
 
 	"github.com/charmbracelet/log"
 	"github.com/go-git/go-git/v5"
 	"github.com/yuin/gopher-lua"
-	"selene.frankmayer.dev/util"
 )
 
 // Clones a git repository to a specified destination. If the repository already exists, it will pull the latest changes instead.
@@ -44,7 +46,7 @@ func gitCloneOrPull(l *lua.LState) int {
 	}
 	err = wt.Pull(&git.PullOptions{})
 	if err != nil {
-		if err == git.NoErrAlreadyUpToDate {
+		if errors.Is(err, git.NoErrAlreadyUpToDate) {
 			log.Debug("Repo already up to date", "repo", url, "dest", dest)
 			l.Push(lua.LTrue)
 			return 1

@@ -1,16 +1,17 @@
 package main
 
 import (
+	"github.com/Frank-Mayer/selene/internal/docs"
+	"github.com/Frank-Mayer/selene/internal/extensions"
+	"github.com/Frank-Mayer/selene/internal/util"
+
 	"fmt"
 	"os"
 	"path"
 	"strings"
 
 	"github.com/charmbracelet/log"
-	lua "github.com/yuin/gopher-lua"
-	"selene.frankmayer.dev/docs"
-	"selene.frankmayer.dev/extensions"
-	"selene.frankmayer.dev/util"
+	"github.com/yuin/gopher-lua"
 )
 
 func main() {
@@ -30,46 +31,46 @@ func main() {
 	}
 
 	// check for -- to pass args to lua
-	pass_args := false
-	pass_args_list := []string{}
-	arg_separator_index := len(argsWithoutProg)
+	passArgs := false
+	var passArgsList []string
+	argSeparatorIndex := len(argsWithoutProg)
 	for i := 0; i < len(argsWithoutProg); i++ {
 		arg := argsWithoutProg[i]
-		if pass_args {
-			pass_args_list = append(pass_args_list, arg)
+		if passArgs {
+			passArgsList = append(passArgsList, arg)
 		} else {
 			switch arg {
 			case "--debug":
 				log.SetLevel(log.DebugLevel)
-                log.Debug("Debug mode enabled")
-            case "--silent":
-                log.SetLevel(10)
+				log.Debug("Debug mode enabled")
+			case "--silent":
+				log.SetLevel(10)
 			case "--":
-				pass_args = true
-				arg_separator_index = i
+				passArgs = true
+				argSeparatorIndex = i
 			}
 		}
 	}
-	extensions.SetArgs(pass_args_list)
+	extensions.SetArgs(passArgsList)
 
 	// find config folder
 	var err error
-	util.ConfigPath, err = get_config_path()
+	util.ConfigPath, err = getConfigPath()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// run each file passed as an argument
-	for i := 0; i < arg_separator_index; i++ {
+	for i := 0; i < argSeparatorIndex; i++ {
 		file := argsWithoutProg[i]
-        if strings.HasPrefix(file, "-") {
-            continue
-        }
-		init_file, err := getInitFile(util.ConfigPath, file)
+		if strings.HasPrefix(file, "-") {
+			continue
+		}
+		initFile, err := getInitFile(util.ConfigPath, file)
 		if err != nil {
 			log.Fatal(err)
 		}
-		err = runLuaFile(init_file)
+		err = runLuaFile(initFile)
 		if err != nil {
 			log.Fatal("Error running file: "+file, "error", err)
 		}
@@ -93,30 +94,30 @@ func treatSpecialArgs(arg0 string) {
 	}
 }
 
-func getInitFile(config_path string, file string) (string, error) {
-	init_file := path.Join(config_path, file+".lua")
-	if _, err := os.Stat(init_file); err != nil {
+func getInitFile(configPath string, file string) (string, error) {
+	initFile := path.Join(configPath, file+".lua")
+	if _, err := os.Stat(initFile); err != nil {
 		return "", err
 	}
-	return init_file, nil
+	return initFile, nil
 }
 
-func runLuaFile(init_file string) error {
+func runLuaFile(initFile string) error {
 	// setup lua
 	l := lua.NewState()
 	defer l.Close()
 	extensions.RegisterExtensions(l)
 
-	package_path := util.GetPackagePath()
-	setup_code := "package.path = '" + strings.ReplaceAll(package_path, "\\", "\\\\") + ";'"
-	err := l.DoString(setup_code)
+	packagePath := util.GetPackagePath()
+	setupCode := "package.path = '" + strings.ReplaceAll(packagePath, "\\", "\\\\") + ";'"
+	err := l.DoString(setupCode)
 	if err != nil {
-		log.Error("Error setting up lua", "error", err, "code", setup_code)
+		log.Error("Error setting up lua", "error", err, "code", setupCode)
 		return err
 	}
 
 	// run lua file
-	err = l.DoFile(init_file)
+	err = l.DoFile(initFile)
 	if err != nil {
 		return err
 	}
@@ -124,7 +125,7 @@ func runLuaFile(init_file string) error {
 	return nil
 }
 
-func get_config_path() (string, error) {
+func getConfigPath() (string, error) {
 	pathname := path.Join(".", ".selene")
 
 	// check for current directory
@@ -181,13 +182,13 @@ func initDemoConfig() error {
 }
 
 func initDefinitons() error {
-	config_path, err := util.GetGlobalConfigPath()
+	configPath, err := util.GetGlobalConfigPath()
 	if err != nil {
 		return err
 	}
 
-	lib_path := path.Join(config_path, "lib")
-	filename := path.Join(lib_path, "Selene.lua")
+	libPath := path.Join(configPath, "lib")
+	filename := path.Join(libPath, "Selene.lua")
 
 	// chek if exists
 	_, err = os.Stat(filename)
@@ -202,7 +203,7 @@ func initDefinitons() error {
 	}
 
 	// create directory
-	err = os.MkdirAll(lib_path, 0775)
+	err = os.MkdirAll(libPath, 0775)
 	if err != nil {
 		return err
 	}
@@ -219,7 +220,7 @@ func initDefinitons() error {
 	if err != nil {
 		return err
 	}
-	log.Info("Lua API definitions created", "location", lib_path)
+	log.Info("Lua API definitions created", "location", libPath)
 
 	return nil
 }

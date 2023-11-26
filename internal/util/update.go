@@ -1,20 +1,20 @@
 package util
 
 import (
+	"github.com/charmbracelet/log"
+
 	"net/http"
 	"os"
 	"os/exec"
 	"runtime"
-
-	"github.com/charmbracelet/log"
 )
 
 func Update() {
-	current_location, err := findCurrentLocation()
+	currentLocation, err := findCurrentLocation()
 	if err != nil {
 		log.Fatal("Could not find current installation location", "error", err)
 	}
-	log.Info("Current location is " + current_location)
+	log.Info("Current location is " + currentLocation)
 
 	log.Info("Looking for binary", "os", runtime.GOOS, "arch", runtime.GOARCH)
 
@@ -35,7 +35,7 @@ func Update() {
 		log.Fatal("Could not download new binary", "error", resp.Status)
 	}
 
-	err = install(current_location, resp.Body)
+	err = install(currentLocation, resp.Body)
 	if err != nil {
 		log.Fatal("Could not install new binary", "error", err)
 	}
