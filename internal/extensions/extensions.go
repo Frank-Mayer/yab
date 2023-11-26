@@ -136,6 +136,24 @@ var Functions = []Function{
 		"",
 		"Selene.block()",
 	},
+	{
+		"find",
+		"Find files matching a pattern in a directory.",
+		[]string{"pattern string"},
+		[]string{"A table containing the matching file paths."},
+		find,
+		"table",
+		"Selene.find('*.txt')",
+	},
+	{
+		"find",
+		"Find files matching a pattern in a directory.",
+		[]string{"root string", "pattern string"},
+		[]string{"A table containing the matching file paths."},
+		find,
+		"table",
+		"Selene.find('foo', '*.txt')",
+	},
 }
 
 func Definitions() string {

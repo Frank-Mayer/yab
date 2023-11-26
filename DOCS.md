@@ -1,4 +1,4 @@
-# Documentation v0.5.0
+# Documentation v0.6.0
 
 ## Usage
 
@@ -174,5 +174,36 @@ end)
 
 ```lua
 Selene.block()
+```
+
+### 𝑓 find
+
+*Find files matching a pattern in a directory.*
+
+**Parameters:** 
+* pattern `string`
+
+**Returns:** A table containing the matching file paths.
+
+**Example:**
+
+```lua
+Selene.find('*.txt')
+```
+
+### 𝑓 find
+
+*Find files matching a pattern in a directory.*
+
+**Parameters:** 
+* root `string`
+* pattern `string`
+
+**Returns:** A table containing the matching file paths.
+
+**Example:**
+
+```lua
+Selene.find('foo', '*.txt')
 ```
 
