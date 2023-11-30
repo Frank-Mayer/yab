@@ -11,13 +11,75 @@ Use Lua scripts to define specific actions and execute them from the command lin
 
 **Does that not already exist?**
 
-The build tools Bazel and Gradle served as an example.
-However, Gradle is mainly used in the Java ecosystem and Bazel is very complicated.
-Both use a domain-specific language, which complicates familiarization and makes it difficult to find help.
+No!
 
-Lua is a common and performant language that is used, for example, to configure [Neovim](https://github.com/neovim) or build World of Warcraft Mods.
+<table>
+    <thead>
+        <tr>
+            <td></td>
+            <td><sup>Heavily used</sup></td>
+            <td><sup>Builtin support for many technologies</sup></td>
+            <td><sup>Easy to setup and extend</sup></td>
+            <td><sup>Basic syntax (loops, functions, ...)</sup></td>
+            <td><sup>Parameters</sup></td>
+            <td><sup>No domain specific language</sup></td>
+            <td><sup>Cross-platform by default</sup></td>
+            <td><sup>Does not make the codebase messy</sup></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Selene</td>
+            <td>:x:</td>
+            <td>:x:</td>
+            <td>:white_check_mark:</td>
+            <td>:white_check_mark:</td>
+            <td>:white_check_mark:</td>
+            <td>:white_check_mark:</td>
+            <td>:white_check_mark:</td>
+            <td>:white_check_mark:</td>
+        </tr>
+        <tr>
+            <td>Bazel</td>
+            <td>:x:</td>
+            <td>:white_check_mark:</td>
+            <td>:x:</td>
+            <td>:x:</td>
+            <td>:x:</td>
+            <td>:x:</td>
+            <td>:white_check_mark:</td>
+            <td>:x:</td>
+        </tr>
+        <tr>
+            <td>Gradle</td>
+            <td>:white_check_mark:</td>
+            <td>:x:</td>
+            <td>:x:</td>
+            <td>:white_check_mark:</td>
+            <td>:x:</td>
+            <td>:x: / :white_check_mark:</td>
+            <td>:white_check_mark:</td>
+            <td>:white_check_mark:</td>
+        </tr>
+        <tr>
+            <td>Make</td>
+            <td>:white_check_mark:</td>
+            <td>:x:</td>
+            <td>:white_check_mark:</td>
+            <td>:white_check_mark:</td>
+            <td>:white_check_mark:</td>
+            <td>:x:</td>
+            <td>:x:</td>
+            <td>:white_check_mark:</td>
+        </tr>
+    </tbody>
+</table>
 
-Looking for an example configuration? Take a look at [this projects `.selene` folder](https://github.com/Frank-Mayer/selene/tree/main/.selene).
+Lua is a common and performant language.
+Selene offers some useful functions in addition to the Lua standard library that might be useful when building configurations.
+
+Looking for an example configuration?
+Take a look at [this projects `.selene` folder](https://github.com/Frank-Mayer/selene/tree/main/.selene).
 
 ## Installation
 
@@ -35,17 +97,9 @@ go install github.com/Frank-Mayer/selene/cmd/selene@latest
 
 Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/selene/blob/main/DOCS.md) file.
 
-## Badge
-
-[![Selene Project](https://img.shields.io/badge/Selene_Project-2C2D72?logo=lua)](https://github.com/Frank-Mayer/selene)
-
-```markdown
-[![Selene Project](https://img.shields.io/badge/Selene_Project-2C2D72?logo=lua)](https://github.com/Frank-Mayer/selene)
-```
-
 ## Usage
 
-Run one or more sripts:
+Run one or more configs:
 
 ```bash
 selene [configs ...]
@@ -57,7 +111,9 @@ Pass arguments to the scripts:
 selene [configs ...] -- [args ...]
 ```
 
-The following folders are searched for configs:
+A config is a lua file inside the config directory.
+
+The following directories are used as configs (first found wins)
 
 1. `./.selene/`
 1. `$XDG_CONFIG_HOME/selene/`
@@ -66,7 +122,10 @@ The following folders are searched for configs:
 
 ## Lua definitions
 
-When you initialize a project with `selene --init` a definitions file is created in one of those directories:
+Run `selene --def` to create a definitions file in your global config directory.
+Use this to configure your Lua language server.
+
+Global config is one of those directories:
 
 1. `$XDG_CONFIG_HOME/selene/`
 1. `$APPDATA/selene/`
@@ -77,6 +136,14 @@ When you initialize a project with `selene --init` a definitions file is created
 ```yaml
 - name: Setup Selene
   uses: Frank-Mayer/selene-setup@v1.0.0
+```
+
+## Badge
+
+[![Selene Project](https://img.shields.io/badge/Selene_Project-2C2D72?logo=lua)](https://github.com/Frank-Mayer/selene)
+
+```markdown
+[![Selene Project](https://img.shields.io/badge/Selene_Project-2C2D72?logo=lua)](https://github.com/Frank-Mayer/selene)
 ```
 
 ## Etymology
