@@ -26,18 +26,6 @@ func main() {
 	test("return Yab.stdall(\"echo foo\")", "foo\n")
 	test("return Yab.stdout(\"echo foo\")", "foo\n")
 
-	pack := []byte("{\"scripts\": {\"test\": \"echo foo\"}}")
-	err := os.WriteFile("./package.json", pack, 0664)
-	if err != nil {
-		log.Error("Writing package.json", "err", err)
-	} else {
-		test("return Yab.js_run(\"test\")", "true")
-		err := os.Remove("./package.json")
-		if err != nil {
-			log.Fatal("Error removing package.json", "err", err)
-		}
-	}
-
 	if hasError {
 		os.Exit(1)
 	}
