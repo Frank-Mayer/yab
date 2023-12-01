@@ -49,8 +49,8 @@ func Markdown() string {
 	sb.WriteString("Prints the version of the program.\n\n")
 	sb.WriteString("**" + binName + " [--help, -h]**\n\n")
 	sb.WriteString("Prints this help.\n\n")
-	sb.WriteString("**" + binName + " --init**\n\n")
-	sb.WriteString("Initializes a new Selene project.\n\n")
+	sb.WriteString("**" + binName + " --def**\n\n")
+	sb.WriteString("Creates definitions file in global config.\n\n")
 	sb.WriteString("**" + binName + " [--update, --upgrade, -u]**\n\n")
 	sb.WriteString("Updates the Selene binary to the latest version.\n\n")
 

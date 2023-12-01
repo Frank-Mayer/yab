@@ -1,4 +1,4 @@
-# Documentation v0.6.0
+# Documentation v0.7.0
 
 ## Usage
 
@@ -28,9 +28,9 @@ Prints the version of the program.
 
 Prints this help.
 
-**selene --init**
+**selene --def**
 
-Initializes a new Selene project.
+Creates definitions file in global config.
 
 **selene [--update, --upgrade, -u]**
 
