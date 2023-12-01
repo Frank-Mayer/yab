@@ -1,7 +1,7 @@
 package extensions
 
 import (
-	"github.com/Frank-Mayer/selene/internal/util"
+	"github.com/Frank-Mayer/yab/internal/util"
 
 	"errors"
 	"path"

@@ -13,7 +13,7 @@ var (
 func BinName() string {
 	binName := os.Args[0]
 	if len(binName) > 24 {
-		return "selene"
+		return "yab"
 	}
 	return binName
 }
@@ -28,7 +28,7 @@ func GetPackagePath() string {
 
 func GetGlobalConfigPath() (string, error) {
 	if xdgConfigHome, exists := os.LookupEnv("XDG_CONFIG_HOME"); exists {
-		pathname := path.Join(xdgConfigHome, "selene")
+		pathname := path.Join(xdgConfigHome, "yab")
 		// check if pathname exists
 		_, err := os.Stat(pathname)
 		if err == nil {
@@ -45,7 +45,7 @@ func GetGlobalConfigPath() (string, error) {
 	}
 
 	if home, exists := os.LookupEnv("APPDATA"); exists {
-		pathname := path.Join(home, "selene")
+		pathname := path.Join(home, "yab")
 		// check if pathname exists
 		_, err := os.Stat(pathname)
 		if err == nil {
@@ -62,7 +62,7 @@ func GetGlobalConfigPath() (string, error) {
 	}
 
 	if home, exists := os.LookupEnv("HOME"); exists {
-		pathname := path.Join(home, ".config", "selene")
+		pathname := path.Join(home, ".config", "yab")
 		// check if pathname exists
 		_, err := os.Stat(pathname)
 		if err == nil {

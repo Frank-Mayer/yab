@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Frank-Mayer/selene/internal/extensions"
+	"github.com/Frank-Mayer/yab/internal/extensions"
 
 	"os"
 	"runtime"
@@ -21,17 +21,17 @@ func main() {
 	// test that the lua code works
 	test("return 1", "1")
 	test("return 1 + 1", "2")
-	test("return Selene.os_type()", runtime.GOOS)
-	test("return Selene.os_arch()", runtime.GOARCH)
-	test("return Selene.stdall(\"echo foo\")", "foo\n")
-	test("return Selene.stdout(\"echo foo\")", "foo\n")
+	test("return Yab.os_type()", runtime.GOOS)
+	test("return Yab.os_arch()", runtime.GOARCH)
+	test("return Yab.stdall(\"echo foo\")", "foo\n")
+	test("return Yab.stdout(\"echo foo\")", "foo\n")
 
 	pack := []byte("{\"scripts\": {\"test\": \"echo foo\"}}")
 	err := os.WriteFile("./package.json", pack, 0664)
 	if err != nil {
 		log.Error("Writing package.json", "err", err)
 	} else {
-		test("return Selene.js_run(\"test\")", "true")
+		test("return Yab.js_run(\"test\")", "true")
 		err := os.Remove("./package.json")
 		if err != nil {
 			log.Fatal("Error removing package.json", "err", err)

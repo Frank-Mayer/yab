@@ -36,11 +36,11 @@ jobs:
       - name: Test
         run: go run cmd/test/main.go
       - name: Build
-        run: 'go build -ldflags="-s -w" -o selene-windows-amd64.exe cmd/selene/main.go'
+        run: 'go build -ldflags="-s -w" -o yab-windows-amd64.exe cmd/yab/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          path: "./selene-windows-amd64.exe"
+          path: "./yab-windows-amd64.exe"
   win_arm:
     runs-on: windows-latest
     steps:
@@ -57,11 +57,11 @@ jobs:
       - name: Test
         run: go run cmd/test/main.go
       - name: Build
-        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o selene-windows-arm64.exe cmd/selene/main.go'
+        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o yab-windows-arm64.exe cmd/yab/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          path: "./selene-windows-arm64.exe"
+          path: "./yab-windows-arm64.exe"
   mac:
     runs-on: macos-latest
     steps:
@@ -78,17 +78,17 @@ jobs:
       - name: Test
         run: go run cmd/test/main.go
       - name: Build
-        run: 'go build -ldflags="-s -w" -o selene-darwin-amd64 cmd/selene/main.go'
+        run: 'go build -ldflags="-s -w" -o yab-darwin-amd64 cmd/yab/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          path: "./selene-darwin-amd64"
+          path: "./yab-darwin-amd64"
       - name: Build ARM
-        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o selene-darwin-arm64 cmd/selene/main.go'
+        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o yab-darwin-arm64 cmd/yab/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          path: "./selene-darwin-arm64"
+          path: "./yab-darwin-arm64"
   ubuntu:
     runs-on: ubuntu-latest
     steps:
@@ -105,17 +105,17 @@ jobs:
       - name: Test
         run: go run cmd/test/main.go
       - name: Build
-        run: 'go build -ldflags="-s -w" -o selene-linux-amd64 cmd/selene/main.go'
+        run: 'go build -ldflags="-s -w" -o yab-linux-amd64 cmd/yab/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          path: "./selene-linux-amd64"
+          path: "./yab-linux-amd64"
       - name: Build ARM
-        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o selene-linux-arm64 cmd/selene/main.go'
+        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o yab-linux-arm64 cmd/yab/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          path: "./selene-linux-arm64"
+          path: "./yab-linux-arm64"
   deploy:
     needs:
       - win
@@ -138,17 +138,17 @@ jobs:
           cd artifact
           echo '<!DOCTYPE html>' >> index.html
           echo '<html lang="en-US"><head>' >> index.html
-          echo '<title>Selene Artifacts</title>' >> index.html
+          echo '<title>Yab Artifacts</title>' >> index.html
           echo '<style>:root{color-scheme: light dark; font-family: sans-serif;}</style>' >> index.html
           echo '</head><body>' >> index.html
           echo '<h1>Artifacts</h1>' >> index.html
           echo '<ul>' >> index.html
-          echo '<li><a download="selene" href="selene-darwin-amd64">selene-darwin-amd64</a></li>' >> index.html
-          echo '<li><a download="selene" href="selene-darwin-arm64">selene-darwin-arm64</a></li>' >> index.html
-          echo '<li><a download="selene" href="selene-linux-amd64">selene-linux-amd64</a></li>' >> index.html
-          echo '<li><a download="selene" href="selene-linux-arm64">selene-linux-arm64</a></li>' >> index.html
-          echo '<li><a download="selene.exe" href="selene-windows-amd64.exe">selene-windows-amd64.exe</a></li>' >> index.html
-          echo '<li><a download="selene.exe" href="selene-windows-arm64.exe">selene-windows-arm64.exe</a></li>' >> index.html
+          echo '<li><a download="yab" href="yab-darwin-amd64">yab-darwin-amd64</a></li>' >> index.html
+          echo '<li><a download="yab" href="yab-darwin-arm64">yab-darwin-arm64</a></li>' >> index.html
+          echo '<li><a download="yab" href="yab-linux-amd64">yab-linux-amd64</a></li>' >> index.html
+          echo '<li><a download="yab" href="yab-linux-arm64">yab-linux-arm64</a></li>' >> index.html
+          echo '<li><a download="yab.exe" href="yab-windows-amd64.exe">yab-windows-amd64.exe</a></li>' >> index.html
+          echo '<li><a download="yab.exe" href="yab-windows-arm64.exe">yab-windows-arm64.exe</a></li>' >> index.html
           echo '</ul>' >> index.html
           echo '</body></html>' >> index.html
           cd ..

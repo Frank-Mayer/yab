@@ -1,11 +1,13 @@
-# Selene
+# Yab
 
-[![Deploy to Pages](https://github.com/Frank-Mayer/selene/actions/workflows/deploy.yml/badge.svg)](https://github.com/Frank-Mayer/selene/actions/workflows/deploy.yml)
+Yet another build tool
+
+[![Deploy to Pages](https://github.com/Frank-Mayer/yab/actions/workflows/deploy.yml/badge.svg)](https://github.com/Frank-Mayer/yab/actions/workflows/deploy.yml)
 
 Wouldn't it be great if you could use the same build tool for every project?
 Regardless of operating system, programming language...
 
-Selene is just that.
+Yab is just that.
 
 Use Lua scripts to define specific actions and execute them from the command line.
 
@@ -29,7 +31,7 @@ No!
     </thead>
     <tbody>
         <tr>
-            <td>Selene</td>
+            <td>Yab</td>
             <td>:x:</td>
             <td>:x:</td>
             <td>:white_check_mark:</td>
@@ -76,86 +78,72 @@ No!
 </table>
 
 Lua is a common and performant language.
-Selene offers some useful functions in addition to the Lua standard library that might be useful when building configurations.
+Yab offers some useful functions in addition to the Lua standard library that might be useful when building configurations.
 
 Looking for an example configuration?
-Take a look at [this projects `.selene` folder](https://github.com/Frank-Mayer/selene/tree/main/.selene).
+Take a look at [this projects `.yab` folder](https://github.com/Frank-Mayer/yab/tree/main/.yab).
 
 ## Installation
 
 ### Download prebuild
 
-https://frank-mayer.github.io/selene/
+https://frank-mayer.github.io/yab/
 
 ### Install using Go
 
 ```bash
-go install github.com/Frank-Mayer/selene/cmd/selene@latest
+go install github.com/Frank-Mayer/yab/cmd/yab@latest
 ```
 
 ## Docs
 
-Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/selene/blob/main/DOCS.md) file.
+Documentation is in the [DOCS.md](https://github.com/Frank-Mayer/yab/blob/main/DOCS.md) file.
 
 ## Usage
 
 Run one or more configs:
 
 ```bash
-selene [configs ...]
+yab [configs ...]
 ```
 
 Pass arguments to the scripts:
 
 ```bash
-selene [configs ...] -- [args ...]
+yab [configs ...] -- [args ...]
 ```
 
 A config is a lua file inside the config directory.
 
 The following directories are used as configs (first found wins)
 
-1. `./.selene/`
-1. `$XDG_CONFIG_HOME/selene/`
-1. `$APPDATA/selene/`
-1. `$HOME/.config/selene/`
+1. `./.yab/`
+1. `$XDG_CONFIG_HOME/yab/`
+1. `$APPDATA/yab/`
+1. `$HOME/.config/yab/`
 
 ## Lua definitions
 
-Run `selene --def` to create a definitions file in your global config directory.
+Run `yab --def` to create a definitions file in your global config directory.
 Use this to configure your Lua language server.
 
 Global config is one of those directories:
 
-1. `$XDG_CONFIG_HOME/selene/`
-1. `$APPDATA/selene/`
-1. `$HOME/.config/selene/`
+1. `$XDG_CONFIG_HOME/yab/`
+1. `$APPDATA/yab/`
+1. `$HOME/.config/yab/`
 
 ## GitHub Actions
 
 ```yaml
-- name: Setup Selene
-  uses: Frank-Mayer/selene-setup@v1.0.0
+- name: Setup Yab
+  uses: Frank-Mayer/yab-setup@v1.0.0
 ```
 
 ## Badge
 
-[![Selene Project](https://img.shields.io/badge/Selene_Project-2C2D72?logo=lua)](https://github.com/Frank-Mayer/selene)
+[![Yab Project](https://img.shields.io/badge/Yab_Project-2C2D72?logo=lua)](https://github.com/Frank-Mayer/yab)
 
 ```markdown
-[![Selene Project](https://img.shields.io/badge/Selene_Project-2C2D72?logo=lua)](https://github.com/Frank-Mayer/selene)
+[![Yab Project](https://img.shields.io/badge/Yab_Project-2C2D72?logo=lua)](https://github.com/Frank-Mayer/yab)
 ```
-
-## Etymology
-
-<a href="https://en.wikipedia.org/wiki/Selene#/media/File:Clipeus_Selene_Terme.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Clipeus_Selene_Terme.jpg" alt="Clipeus Selene Terme" align="right" style="height: 6em; float: right;" />
-</a>
-
-Lua is Portuguese for moon. Selene is the Greek goddess of the moon.
-
-> In ancient Greek mythology and religion, Selene (/sɪˈliːniː/; Greek: Σελήνη pronounced [selɛ̌ːnɛː] seh-LEH-neh, meaning "Moon") is the goddess and personification of the Moon.
-> Also known as Mene, she is traditionally the daughter of the Titans Hyperion and Theia, and sister of the sun god Helios and the dawn goddess Eos.
-> She drives her moon chariot across the heavens.
->
-> https://en.wikipedia.org/wiki/Selene

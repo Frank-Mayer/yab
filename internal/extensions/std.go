@@ -5,7 +5,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Frank-Mayer/selene/internal/util"
+	"github.com/Frank-Mayer/yab/internal/util"
 	"github.com/charmbracelet/log"
 	"github.com/yuin/gopher-lua"
 )

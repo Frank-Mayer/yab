@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/Frank-Mayer/selene/internal/docs"
+	"github.com/Frank-Mayer/yab/internal/docs"
 )
 
 func main() {

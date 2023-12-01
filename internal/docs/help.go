@@ -1,8 +1,8 @@
 package docs
 
 import (
-	"github.com/Frank-Mayer/selene/internal/extensions"
-	"github.com/Frank-Mayer/selene/internal/util"
+	"github.com/Frank-Mayer/yab/internal/extensions"
+	"github.com/Frank-Mayer/yab/internal/util"
 
 	"fmt"
 	"strings"
@@ -36,7 +36,7 @@ func Markdown() string {
 	sb.WriteString("## Usage\n\n")
 	sb.WriteString(binName + " [configs ...]\n\n")
 	sb.WriteString(binName + " [configs ...] -- [args ...]\n\n")
-	sb.WriteString("Configs are Lua files in your local `.selene` folder or in the global config folder.\n\n")
+	sb.WriteString("Configs are Lua files in your local `.yab` folder or in the global config folder.\n\n")
 
 	sb.WriteString("### Flags\n\n")
 	sb.WriteString("**--debug**\n\n")
@@ -52,9 +52,9 @@ func Markdown() string {
 	sb.WriteString("**" + binName + " --def**\n\n")
 	sb.WriteString("Creates definitions file in global config.\n\n")
 	sb.WriteString("**" + binName + " [--update, --upgrade, -u]**\n\n")
-	sb.WriteString("Updates the Selene binary to the latest version.\n\n")
+	sb.WriteString("Updates the Yab binary to the latest version.\n\n")
 
-	sb.WriteString("## Lua API Functions (in the `Selene` global table)\n\n")
+	sb.WriteString("## Lua API Functions (in the `Yab` global table)\n\n")
 	for _, f := range extensions.Functions {
 		sb.WriteString(addFunction(&f))
 		sb.WriteString("\n")

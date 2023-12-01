@@ -114,7 +114,7 @@ var Functions = []Function{
 		[]string{"true if the zip file was created successfully, false otherwise."},
 		makeZip,
 		"boolean",
-		"Selene.zip(\n\t{'foo.txt', 'bar.txt', 'baz/'},\n\t'archive.zip'\n)",
+		"Yab.zip(\n\t{'foo.txt', 'bar.txt', 'baz/'},\n\t'archive.zip'\n)",
 	},
 	{
 		"watch",
@@ -125,7 +125,7 @@ var Functions = []Function{
 		[]string{},
 		watch,
 		"",
-		"Selene.watch('foo.txt', function(file, event)\n\tprint('foo.txt changed!')\nend)",
+		"Yab.watch('foo.txt', function(file, event)\n\tprint('foo.txt changed!')\nend)",
 	},
 	{
 		"block",
@@ -134,7 +134,7 @@ var Functions = []Function{
 		[]string{},
 		block,
 		"",
-		"Selene.block()",
+		"Yab.block()",
 	},
 	{
 		"find",
@@ -143,7 +143,7 @@ var Functions = []Function{
 		[]string{"A table containing the matching file paths."},
 		find,
 		"table",
-		"Selene.find('*.txt')",
+		"Yab.find('*.txt')",
 	},
 	{
 		"find",
@@ -152,15 +152,15 @@ var Functions = []Function{
 		[]string{"A table containing the matching file paths."},
 		find,
 		"table",
-		"Selene.find('foo', '*.txt')",
+		"Yab.find('foo', '*.txt')",
 	},
 }
 
 func Definitions() string {
 	sb := strings.Builder{}
 	sb.WriteString("---@meta\n")
-	sb.WriteString("---@class Selene\n")
-	sb.WriteString("Selene = {}\n")
+	sb.WriteString("---@class Yab\n")
+	sb.WriteString("Yab = {}\n")
 	for _, f := range Functions {
 		sb.WriteString("\n")
 		for _, p := range f.Parameters {
@@ -174,7 +174,7 @@ func Definitions() string {
 		sb.WriteString("---")
 		sb.WriteString(f.Description)
 		sb.WriteString("\n")
-		sb.WriteString("Selene.")
+		sb.WriteString("Yab.")
 		sb.WriteString(f.Name)
 		sb.WriteString(" = function(")
 		for i, p := range f.Parameters {
@@ -194,5 +194,5 @@ func RegisterExtensions(l *lua.LState) {
 		l.SetTable(table, lua.LString(f.Name), l.NewFunction(f.Function))
 	}
 
-	l.SetGlobal("Selene", table)
+	l.SetGlobal("Yab", table)
 }

@@ -1,4 +1,4 @@
-local args = Selene.args()
+local args = Yab.args()
 local join = function(t)
     local s = ""
     for _, v in ipairs(t) do
@@ -6,4 +6,4 @@ local join = function(t)
     end
     return s
 end
-os.execute("go run cmd/selene/selene.go " .. join(args))
+os.execute("go run cmd/yab/yab.go " .. join(args))

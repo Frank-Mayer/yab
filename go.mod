@@ -1,4 +1,4 @@
-module github.com/Frank-Mayer/selene
+module github.com/Frank-Mayer/yab
 
 go 1.21.3
 

@@ -18,7 +18,7 @@ func Update() {
 
 	log.Info("Looking for binary", "os", runtime.GOOS, "arch", runtime.GOARCH)
 
-	url := "https://frank-mayer.github.io/selene/selene-" + runtime.GOOS + "-" + runtime.GOARCH
+	url := "https://frank-mayer.github.io/yab/yab-" + runtime.GOOS + "-" + runtime.GOARCH
 	if runtime.GOOS == "windows" {
 		url += ".exe"
 	}

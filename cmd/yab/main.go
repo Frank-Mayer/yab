@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/Frank-Mayer/selene/internal/cli"
-	"github.com/Frank-Mayer/selene/internal/docs"
-	"github.com/Frank-Mayer/selene/internal/extensions"
-	"github.com/Frank-Mayer/selene/internal/util"
+	"github.com/Frank-Mayer/yab/internal/cli"
+	"github.com/Frank-Mayer/yab/internal/docs"
+	"github.com/Frank-Mayer/yab/internal/extensions"
+	"github.com/Frank-Mayer/yab/internal/util"
 
 	"fmt"
 	"os"
@@ -93,7 +93,7 @@ func runLuaFile(initFile string) error {
 }
 
 func getConfigPath() (string, error) {
-	pathname := path.Join(".", ".selene")
+	pathname := path.Join(".", ".yab")
 
 	// check for current directory
 	if _, err := os.Stat(pathname); !os.IsNotExist(err) {
@@ -111,7 +111,7 @@ func initDefinitons() {
 	}
 
 	libPath := path.Join(configPath, "lib")
-	filename := path.Join(libPath, "Selene.lua")
+	filename := path.Join(libPath, "Yab.lua")
 
 	// chek if exists
 	_, err = os.Stat(filename)

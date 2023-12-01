@@ -1,12 +1,12 @@
-# Documentation v0.7.0
+# Documentation v1.0.0
 
 ## Usage
 
-selene [configs ...]
+yab [configs ...]
 
-selene [configs ...] -- [args ...]
+yab [configs ...] -- [args ...]
 
-Configs are Lua files in your local `.selene` folder or in the global config folder.
+Configs are Lua files in your local `.yab` folder or in the global config folder.
 
 ### Flags
 
@@ -20,23 +20,23 @@ Disables logging.
 
 ## Command Line Arguments
 
-**selene [--version, -v]**
+**yab [--version, -v]**
 
 Prints the version of the program.
 
-**selene [--help, -h]**
+**yab [--help, -h]**
 
 Prints this help.
 
-**selene --def**
+**yab --def**
 
 Creates definitions file in global config.
 
-**selene [--update, --upgrade, -u]**
+**yab [--update, --upgrade, -u]**
 
-Updates the Selene binary to the latest version.
+Updates the Yab binary to the latest version.
 
-## Lua API Functions (in the `Selene` global table)
+## Lua API Functions (in the `Yab` global table)
 
 ### 𝑓 os_type
 
@@ -138,7 +138,7 @@ Updates the Selene binary to the latest version.
 **Example:**
 
 ```lua
-Selene.zip(
+Yab.zip(
 	{'foo.txt', 'bar.txt', 'baz/'},
 	'archive.zip'
 )
@@ -157,7 +157,7 @@ Selene.zip(
 **Example:**
 
 ```lua
-Selene.watch('foo.txt', function(file, event)
+Yab.watch('foo.txt', function(file, event)
 	print('foo.txt changed!')
 end)
 ```
@@ -173,7 +173,7 @@ end)
 **Example:**
 
 ```lua
-Selene.block()
+Yab.block()
 ```
 
 ### 𝑓 find
@@ -188,7 +188,7 @@ Selene.block()
 **Example:**
 
 ```lua
-Selene.find('*.txt')
+Yab.find('*.txt')
 ```
 
 ### 𝑓 find
@@ -204,6 +204,6 @@ Selene.find('*.txt')
 **Example:**
 
 ```lua
-Selene.find('foo', '*.txt')
+Yab.find('foo', '*.txt')
 ```
 
