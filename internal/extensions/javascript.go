@@ -48,8 +48,8 @@ func jsRun(l *lua.LState) int {
 	case npm:
 		command = "npm run " + script
 	default:
-		l.Push(lua.LFalse)
-		return 1
+		l.Error(lua.LString("No JS package manager found"), 0)
+		return 0 
 	}
 
 	cmd := exec.Command("sh", "-c", command)
@@ -57,13 +57,11 @@ func jsRun(l *lua.LState) int {
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
 	if err != nil {
-		log.Error("Error running script", "error", err)
-		l.Push(lua.LFalse)
-		return 1
+		l.Error(lua.LString("Error running script. " + err.Error()), 0)
+		return 0
 	}
 
-	l.Push(lua.LTrue)
-	return 1
+	return 0
 }
 
 func jsInstall(l *lua.LState) int {
@@ -76,19 +74,17 @@ func jsInstall(l *lua.LState) int {
 	case npm:
 		command = "npm install"
 	default:
-		l.Push(lua.LFalse)
-		return 1
+        l.Error(lua.LString("No JS package manager found"), 0)
+		return 0
 	}
 	cmd := exec.Command("sh", "-c", command)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
 	if err != nil {
-		log.Error("Error running script", "error", err)
-		l.Push(lua.LFalse)
-		return 1
+		l.Error(lua.LString("Error running script. " + err.Error()), 0)
+		return 0
 	}
 
-	l.Push(lua.LTrue)
-	return 1
+	return 0
 }

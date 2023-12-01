@@ -6,7 +6,6 @@ import (
 	"sync"
 
 	"github.com/Frank-Mayer/yab/internal/util"
-	"github.com/charmbracelet/log"
 	"github.com/yuin/gopher-lua"
 )
 
@@ -17,18 +16,18 @@ func stdall(l *lua.LState) int {
 	cmd := util.System(command)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		log.Fatal("Error creating stdout pipe", "error", err)
+		l.Error(lua.LString("Error creating stdout pipe. " + err.Error()), 0)
 		return 0
 	}
 
 	stderr, err := cmd.StderrPipe()
 	if err != nil {
-		log.Fatal("Error creating stderr pipe", "error", err)
+		l.Error(lua.LString("Error creating stderr pipe. " + err.Error()), 0)
 		return 0
 	}
 
 	if err := cmd.Start(); err != nil {
-		log.Fatal("Error starting command", "error", err)
+		l.Error(lua.LString("Error starting command. " + err.Error()), 0)
 		return 0
 	}
 
@@ -55,7 +54,8 @@ func stdall(l *lua.LState) int {
 	wg.Wait()
 
 	if err := cmd.Wait(); err != nil {
-		log.Error("Error executing command", "command", command, "error", err)
+		l.Error(lua.LString("Error executing command. " + err.Error()), 0)
+        return 0
 	}
 
 	l.Push(lua.LString(sb.String()))
@@ -69,12 +69,12 @@ func stdout(l *lua.LState) int {
 	cmd := util.System(command)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		log.Fatal("Error creating stdout pipe", "error", err)
+		l.Error(lua.LString("Error creating stdout pipe. " + err.Error()), 0)
 		return 0
 	}
 
 	if err := cmd.Start(); err != nil {
-		log.Fatal("Error starting command", "error", err)
+		l.Error(lua.LString("Error starting command. " + err.Error()), 0)
 		return 0
 	}
 
@@ -94,7 +94,8 @@ func stdout(l *lua.LState) int {
 	wg.Wait()
 
 	if err := cmd.Wait(); err != nil {
-		log.Error("Error executing command", "command", command, "error", err)
+		l.Error(lua.LString("Error executing command. " + err.Error()), 0)
+        return 0
 	}
 
 	l.Push(lua.LString(sb.String()))
@@ -109,12 +110,12 @@ func stderr(l *lua.LState) int {
 
 	stderr, err := cmd.StderrPipe()
 	if err != nil {
-		log.Fatal("Error creating stderr pipe", "error", err)
+		l.Error(lua.LString("Error creating stderr pipe. " + err.Error()), 0)
 		return 0
 	}
 
 	if err := cmd.Start(); err != nil {
-		log.Fatal("Error starting command", "error", err)
+		l.Error(lua.LString("Error starting command. " + err.Error()), 0)
 		return 0
 	}
 
@@ -133,7 +134,8 @@ func stderr(l *lua.LState) int {
 	wg.Wait()
 
 	if err := cmd.Wait(); err != nil {
-		log.Error("Error executing command", "command", command, "error", err)
+		l.Error(lua.LString("Error executing command. " + err.Error()), 0)
+        return 0
 	}
 
 	l.Push(lua.LString(sb.String()))

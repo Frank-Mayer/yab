@@ -12,7 +12,8 @@ func watch(l *lua.LState) int {
 
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
-		log.Error(err)
+		l.Error(lua.LString("Error creating watcher. "+err.Error()), 0)
+		return 0
 	}
 
 	go func() {
@@ -36,19 +37,20 @@ func watch(l *lua.LState) int {
 					default:
 						op = "unknown"
 					}
-					log.Debug("Event received", "event", event)
 					err := l.CallByParam(lua.P{
 						Fn:      callback,
 						NRet:    0,
 						Protect: true,
 					}, lua.LString(event.Name), lua.LString(op))
 					if err != nil {
-						log.Error("Error calling callback", "error", err)
+						l.Error(lua.LString("Error calling callback. "+err.Error()), 0)
+						return
 					}
 				}
 			case err := <-watcher.Errors:
 				if err != nil {
-					log.Error("Error watching file", "error", err)
+					l.Error(lua.LString("Error watching path. "+err.Error()), 0)
+					return
 				}
 			}
 		}
@@ -59,7 +61,8 @@ func watch(l *lua.LState) int {
 		log.Debug("Adding path to watcher", "path", path)
 		err = watcher.Add(path)
 		if err != nil {
-			log.Error("Error adding path to watcher", "path", path, "error", err)
+			l.Error(lua.LString("Error adding path to watcher. "+err.Error()), 0)
+			return 0
 		}
 	}
 

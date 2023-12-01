@@ -25,9 +25,8 @@ func makeZip(l *lua.LState) int {
 
 	archive, err := os.Create(output)
 	if err != nil {
-		log.Error(err)
-		l.Push(lua.LFalse)
-		return 1
+		l.Error(lua.LString("Error creating zip file. "+err.Error()), 0)
+		return 0
 	}
 	defer archive.Close()
 
@@ -39,36 +38,36 @@ func makeZip(l *lua.LState) int {
 
 		fi, err := os.Stat(path)
 		if os.IsNotExist(err) {
-			log.Error("File does not exist", "path", path)
+			l.Error(lua.LString("File does not exist. "+err.Error()), 0)
 			return // continue
 		}
 
 		if fi.IsDir() {
 			if err := addFilesToZip(writer, path, path); err != nil {
-				log.Error(err)
+				l.Error(lua.LString("Error adding files to zip. "+err.Error()), 0)
+				return // continue
 			}
 		} else {
 			dat, err := os.ReadFile(path)
 			if err != nil {
-				log.Error(err)
+				l.Error(lua.LString("Error reading file. "+err.Error()), 0)
 				return // continue
 			}
 
 			f, err := writer.Create(fi.Name())
 			if err != nil {
-				log.Error(err)
+				l.Error(lua.LString("Error creating file in zip. "+err.Error()), 0)
 				return // continue
 			}
 			_, err = f.Write(dat)
 			if err != nil {
-				log.Error(err)
+				l.Error(lua.LString("Error writing file to zip. "+err.Error()), 0)
 				return // continue
 			}
 		}
 	})
 
-	l.Push(lua.LTrue)
-	return 1
+	return 0
 }
 
 func addFilesToZip(w *zip.Writer, basePath, baseInZip string) error {
