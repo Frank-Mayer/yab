@@ -26,7 +26,7 @@ jobs:
       - name: Setup Go environment
         uses: actions/setup-go@v4.1.0
         with:
-          go-version: ">=1.21.1"
+          go-version: ">=1.21.4"
           cache: false
           architecture: x64
       - name: Checkout
@@ -36,7 +36,7 @@ jobs:
       - name: Test
         run: go run cmd/test/main.go
       - name: Build
-        run: 'go build -ldflags="-s -w" -o selene-windows-amd64.exe cmd/selene/selene.go'
+        run: 'go build -ldflags="-s -w" -o selene-windows-amd64.exe cmd/selene/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -47,7 +47,7 @@ jobs:
       - name: Setup Go environment
         uses: actions/setup-go@v4.1.0
         with:
-          go-version: ">=1.21.1"
+          go-version: ">=1.21.4"
           cache: false
           architecture: x64
       - name: Checkout
@@ -57,7 +57,7 @@ jobs:
       - name: Test
         run: go run cmd/test/main.go
       - name: Build
-        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o selene-windows-arm64.exe cmd/selene/selene.go'
+        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o selene-windows-arm64.exe cmd/selene/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -68,7 +68,7 @@ jobs:
       - name: Setup Go environment
         uses: actions/setup-go@v4.1.0
         with:
-          go-version: ">=1.21.1"
+          go-version: ">=1.21.4"
           cache: false
           architecture: x64
       - name: Checkout
@@ -78,13 +78,13 @@ jobs:
       - name: Test
         run: go run cmd/test/main.go
       - name: Build
-        run: 'go build -ldflags="-s -w" -o selene-darwin-amd64 cmd/selene/selene.go'
+        run: 'go build -ldflags="-s -w" -o selene-darwin-amd64 cmd/selene/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           path: "./selene-darwin-amd64"
       - name: Build ARM
-        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o selene-darwin-arm64 cmd/selene/selene.go'
+        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o selene-darwin-arm64 cmd/selene/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -95,7 +95,7 @@ jobs:
       - name: Setup Go environment
         uses: actions/setup-go@v4.1.0
         with:
-          go-version: ">=1.21.1"
+          go-version: ">=1.21.4"
           cache: false
           architecture: x64
       - name: Checkout
@@ -105,13 +105,13 @@ jobs:
       - name: Test
         run: go run cmd/test/main.go
       - name: Build
-        run: 'go build -ldflags="-s -w" -o selene-linux-amd64 cmd/selene/selene.go'
+        run: 'go build -ldflags="-s -w" -o selene-linux-amd64 cmd/selene/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           path: "./selene-linux-amd64"
       - name: Build ARM
-        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o selene-linux-arm64 cmd/selene/selene.go'
+        run: 'env GOARCH=arm64 go build -ldflags="-s -w" -o selene-linux-arm64 cmd/selene/main.go'
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
