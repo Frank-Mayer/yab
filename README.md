@@ -66,7 +66,7 @@ No!
             <td>:white_check_mark:</td>
             <td>:x:</td>
             <td>:white_check_mark:</td>
-            <td>:white_check_mark:</td>
+            <td>:x:</td>
             <td>:white_check_mark:</td>
             <td>:x:</td>
             <td>:x:</td>
