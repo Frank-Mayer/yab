@@ -1,4 +1,4 @@
-# Documentation v1.0.0
+# Documentation v1.1.0
 
 ## Usage
 
@@ -100,20 +100,20 @@ Updates the Yab binary to the latest version.
 
 ### 𝑓 js_run
 
-*Run a script from the `package.json` file using the first javascript package manager found. Trying pnpm, yarn, bun and npm in that order.*
+*Run a script from the `package.json` file using the first javascript package manager found. Trying pnpm, bun and npm in that order.*
 
 **Parameters:** 
 * script `string`
 
-**Returns:** true if a javascript package manager was found, false otherwise.
+**Returns:** None
 
 ### 𝑓 js_install
 
-*Install dependencies from `package.json` using the first javascript package manager found. Trying pnpm, yarn, bun and npm in that order.*
+*Install dependencies from `package.json` using the first javascript package manager found. Trying pnpm, bun and npm in that order.*
 
 **Parameters:** None
 
-**Returns:** true if a javascript package manager was found, false otherwise.
+**Returns:** None
 
 ### 𝑓 git_clone_or_pull
 
@@ -123,7 +123,7 @@ Updates the Yab binary to the latest version.
 * url `string`
 * destination `string`
 
-**Returns:** true if the repository was cloned or pulled successfully, false otherwise.
+**Returns:** None
 
 ### 𝑓 zip
 
@@ -133,7 +133,7 @@ Updates the Yab binary to the latest version.
 * files `table`
 * output `string`
 
-**Returns:** true if the zip file was created successfully, false otherwise.
+**Returns:** None
 
 **Example:**
 
@@ -205,5 +205,21 @@ Yab.find('*.txt')
 
 ```lua
 Yab.find('foo', '*.txt')
+```
+
+### 𝑓 fileinfo
+
+*Get information about a file.*
+
+**Parameters:** 
+* path `string`
+
+**Returns:** A table containing the file information (name, size, mode, modtime, isdir, sys). See https://pkg.go.dev/io/fs#FileInfo for details.
+
+**Example:**
+
+```lua
+local foo_info = Yab.fileinfo('foo.txt')
+print(foo_info.size)
 ```
 
