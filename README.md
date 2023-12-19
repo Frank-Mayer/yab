@@ -133,6 +133,10 @@ Global config is one of those directories:
 1. `$APPDATA/yab/`
 1. `$HOME/.config/yab/`
 
+## Auto completion
+
+Fish completions: [yab.fish](https://github.com/Frank-Mayer/dotfiles/blob/main/.config/fish/completions/yab.fish)
+
 ## GitHub Actions
 
 ```yaml
